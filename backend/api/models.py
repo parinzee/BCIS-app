@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import ArrayField
 
 
 DEPARTMENT = (
@@ -17,6 +16,14 @@ TEAM_COLORS = (
 )
 
 
+class PushID(models.Model):
+    push_id = models.CharField("exponent push id", max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.user} - {self.push_id}"
+
+
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     department = models.CharField("department", choices=DEPARTMENT, max_length=2)
@@ -24,7 +31,8 @@ class Student(models.Model):
         "team color", choices=TEAM_COLORS, max_length=1, blank=True, null=True
     )
 
-    push_ids = ArrayField(models.CharField(max_length=60), size=50)
+    def __str__(self) -> str:
+        return f"{self.user}"
 
 
 class Staff(models.Model):
@@ -32,9 +40,13 @@ class Staff(models.Model):
     team_color = models.CharField(
         "team color", choices=TEAM_COLORS, max_length=1, blank=True, null=True
     )
-    push_ids = ArrayField(models.CharField(max_length=60), size=50)
+
+    def __str__(self) -> str:
+        return f"{self.user}"
 
 
 class Parent(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    push_ids = ArrayField(models.CharField(max_length=60), size=50)
+
+    def __str__(self) -> str:
+        return f"{self.user}"
