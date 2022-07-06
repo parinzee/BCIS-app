@@ -16,6 +16,16 @@ TEAM_COLORS = (
 )
 
 
+class Team_Score(models.Model):
+    score = models.BigIntegerField("score")
+    team_color = models.CharField("team color", choices=TEAM_COLORS, max_length=1)
+    # We only want to track scores for Elementary & Highshcool
+    department = models.CharField("department", choices=DEPARTMENT[1:], max_length=2)
+
+    def __str__(self) -> str:
+        return f"{self.score} - {self.team_color} - {self.department}"
+
+
 class Post(models.Model):
     title = models.CharField("title", max_length=50)
     content = models.TextField("content", max_length=300)
