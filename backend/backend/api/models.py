@@ -16,6 +16,18 @@ TEAM_COLORS = (
 )
 
 
+class Post(models.Model):
+    title = models.CharField("title", max_length=50)
+    content = models.TextField("content", max_length=300)
+    date_posted = models.DateTimeField("date posted", auto_now_add=True)
+    department = models.CharField(
+        "department", choices=DEPARTMENT, max_length=2, blank=True, null=True
+    )
+
+    def __str__(self) -> str:
+        return f"{self.title} - {self.date_posted}"
+
+
 class PushID(models.Model):
     push_id = models.CharField("exponent push id", max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
