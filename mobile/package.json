@@ -1,5 +1,5 @@
 {
-  "name": "mobile-app",
+  "name": "mobile",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -18,10 +18,7 @@
     "react-native-web": "0.17.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@types/react": "~17.0.21",
-    "@types/react-native": "~0.66.13",
-    "typescript": "~4.3.5"
+    "@babel/core": "^7.12.9"
   },
   "private": true
 }
