@@ -1,6 +1,5 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-import { Text, View } from "react-native";
 import { RootTabScreenProps } from "../types";
 
 export default function TabOneScreen({
