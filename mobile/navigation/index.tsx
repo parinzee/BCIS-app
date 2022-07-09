@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { Image, View } from "react-native";
+import { Image } from "react-native";
 
 import Layout from "../constants/Layout";
 
@@ -20,6 +20,7 @@ import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 
 export default function Navigation() {
+  console.log(LinkingConfiguration);
   return (
     <NavigationContainer linking={LinkingConfiguration}>
       <RootNavigator />
@@ -34,7 +35,6 @@ export default function Navigation() {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  console.log(Layout);
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -91,10 +91,10 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="Sports"
+        name="Activities"
         component={TabTwoScreen}
         options={{
-          title: "Sports",
+          title: "Activities",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="sports-handball" color={color} size={30} />
           ),
