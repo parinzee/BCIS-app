@@ -18,11 +18,11 @@ import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import { Theme } from "../types";
 
-export default function Navigation() {
-  console.log(LinkingConfiguration);
+export default function Navigation({ theme }: { theme: Theme }) {
   return (
-    <NavigationContainer linking={LinkingConfiguration}>
+    <NavigationContainer linking={LinkingConfiguration} theme={theme}>
       <RootNavigator />
     </NavigationContainer>
   );

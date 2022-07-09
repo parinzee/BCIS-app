@@ -9,6 +9,7 @@ import {
   NavigatorScreenParams,
 } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { LightTheme, DarkTheme } from "./constants/Theme";
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -40,3 +41,5 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
     BottomTabScreenProps<RootTabParamList, Screen>,
     NativeStackScreenProps<RootStackParamList>
   >;
+
+export type Theme = typeof LightTheme | typeof DarkTheme;
