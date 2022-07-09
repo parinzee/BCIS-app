@@ -3,38 +3,25 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
+import { Feather, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName, Pressable } from "react-native";
+import { Image, View } from "react-native";
+
+import Layout from "../constants/Layout";
 
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
-import {
-  RootStackParamList,
-  RootTabParamList,
-  RootTabScreenProps,
-} from "../types";
+import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 
-export default function Navigation({
-  colorScheme,
-}: {
-  colorScheme: ColorSchemeName;
-}) {
+export default function Navigation() {
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-    >
+    <NavigationContainer linking={LinkingConfiguration}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -47,6 +34,7 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+  console.log(Layout);
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -74,47 +62,63 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator initialRouteName="TabOne">
+    <BottomTab.Navigator
+      initialRouteName="Home"
+      // Show the labels on large devices
+      screenOptions={{ tabBarShowLabel: Layout.isLargeDevice }}
+    >
       <BottomTab.Screen
-        name="TabOne"
+        name="Home"
         component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color }) => (
+            <Feather name="home" color={color} size={27} />
           ),
-        })}
+        }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="News"
         component={TabTwoScreen}
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "News",
+          // Fix icon styling on large screens. React Navigation cuts off the icon since it's wide.
+          // I fixed it by setting the width and then moving the icon closer to the text
+          tabBarIconStyle: { width: 30, marginRight: -10 },
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="newspaper-o" color={color} size={27} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Sports"
+        component={TabTwoScreen}
+        options={{
+          title: "Sports",
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="sports-handball" color={color} size={30} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Profile"
+        component={TabTwoScreen}
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require("../assets/images/placeholder-profile.jpeg")}
+              style={{
+                width: 30,
+                height: 30,
+                borderRadius: 20,
+                borderColor: color,
+                borderWidth: 2,
+              }}
+            />
+          ),
         }}
       />
     </BottomTab.Navigator>
   );
-}
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }

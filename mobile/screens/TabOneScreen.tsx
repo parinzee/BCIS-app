@@ -5,7 +5,7 @@ import { RootTabScreenProps } from "../types";
 
 export default function TabOneScreen({
   navigation,
-}: RootTabScreenProps<"TabOne">) {
+}: RootTabScreenProps<"Home">) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab One</Text>
