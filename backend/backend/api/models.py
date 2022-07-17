@@ -26,7 +26,7 @@ class Team_Score(models.Model):
         return f"{self.score} - {self.team_color} - {self.department}"
 
 
-class Post(models.Model):
+class News(models.Model):
     title = models.CharField("title", max_length=50)
     title_emoji = models.CharField("title emoji", max_length=20)
     content = models.TextField("content", max_length=300)

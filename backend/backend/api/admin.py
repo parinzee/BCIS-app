@@ -7,7 +7,7 @@ admin.site.register(
         models.PushID,
         models.Staff,
         models.Student,
-        models.Post,
+        models.News,
         models.Team_Score,
     ]
 )

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Post, Team_Score
+from .models import News, Team_Score
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -9,9 +9,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ["url", "username"]
 
 
-class PostSerializer(serializers.HyperlinkedModelSerializer):
+class NewsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Post
+        model = News
         fields = [
             "url",
             "title",

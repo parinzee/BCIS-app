@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from .serializers import UserSerializer, PostSerializer
-from .models import Post, Team_Score
+from .serializers import UserSerializer, NewsSerializer
+from .models import News, Team_Score
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -17,13 +17,13 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [permissions.IsAdminUser]
 
 
-class PostsViewSet(viewsets.ReadOnlyModelViewSet):
+class NewsViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    API endpoint that allows posts to be viewed
+    API endpoint that allows news to be viewed
     """
 
-    queryset = Post.objects.all().order_by("date_updated").reverse()
-    serializer_class = PostSerializer
+    queryset = News.objects.all().order_by("date_updated").reverse()
+    serializer_class = NewsSerializer
     permission_classes = [permissions.AllowAny]
 
 
