@@ -1,7 +1,14 @@
 import { StyleSheet, View } from "react-native";
 import NewsItem from "../components/NewsItem";
+import useLayout from "../hooks/useLayout";
 
 export default function NewsScreen() {
+  const Layout = useLayout();
+  const ItemWidth = Layout.isLargeDevice
+    ? Layout.window.width / 1.5
+    : Layout.window.width - 50;
+
+  console.log(ItemWidth);
   return (
     <View style={styles.container}>
       <View>
@@ -11,6 +18,7 @@ export default function NewsScreen() {
           description={
             "This is some nice ***text***.\n And a [link!](https://google.com)"
           }
+          width={ItemWidth}
         />
       </View>
     </View>
@@ -26,10 +34,5 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
   },
 });

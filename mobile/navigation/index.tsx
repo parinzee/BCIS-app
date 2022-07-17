@@ -14,7 +14,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { Image } from "react-native";
 
-import Layout from "../constants/Layout";
+import useLayout from "../hooks/useLayout";
 
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
@@ -66,6 +66,7 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
+  const Layout = useLayout();
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
