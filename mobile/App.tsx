@@ -10,7 +10,6 @@ import useTheme from "./hooks/useTheme";
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const theme = useTheme();
-  console.log(theme);
   if (!isLoadingComplete) {
     return null;
   }

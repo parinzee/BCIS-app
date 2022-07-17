@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
+import NewsItem from "../components/NewsItem";
 
-export default function TabTwoScreen() {
+export default function NewsScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} />
+      <View>
+        <NewsItem title="Urgent News" emoji="😁" description="Hello world" />
+      </View>
     </View>
   );
 }

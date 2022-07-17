@@ -3,9 +3,7 @@ import { Text } from "react-native-paper";
 
 import { RootTabScreenProps } from "../types";
 
-export default function TabOneScreen({
-  navigation,
-}: RootTabScreenProps<"Home">) {
+export default function HomeScreen({ navigation }: RootTabScreenProps<"Home">) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab One</Text>

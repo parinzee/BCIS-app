@@ -14,8 +14,8 @@ import Layout from "../constants/Layout";
 
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import HomeScreen from "../screens/HomeScreen";
+import NewsScreen from "../screens/NewsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -70,7 +70,7 @@ function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="Home"
-        component={TabOneScreen}
+        component={HomeScreen}
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
@@ -80,7 +80,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="News"
-        component={TabTwoScreen}
+        component={NewsScreen}
         options={{
           title: "News",
           // Fix icon styling on large screens. React Navigation cuts off the icon since it's wide.
@@ -93,7 +93,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Activities"
-        component={TabTwoScreen}
+        component={NewsScreen}
         options={{
           title: "Activities",
           tabBarIcon: ({ color }) => (

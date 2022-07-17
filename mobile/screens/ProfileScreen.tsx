@@ -20,6 +20,14 @@ const NavigationItems: NavigationItem[] = [
     title: "Contact Us",
     icon: "chat-question",
   },
+  {
+    title: "Logout",
+    icon: "logout-variant",
+  },
+  {
+    title: "Delete All Data",
+    icon: "exclamation-thick",
+  },
 ];
 
 function Item({ title, icon }: NavigationItem) {
@@ -63,5 +71,8 @@ const styles = StyleSheet.create({
   name: {
     alignSelf: "center",
     paddingVertical: 10,
+  },
+  settingsView: {
+    paddingLeft: 15,
   },
 });
