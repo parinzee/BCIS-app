@@ -12,7 +12,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
-        fields = ["url", "title", "content", "date_posted", "department"]
+        fields = [
+            "url",
+            "title",
+            "title_emoji",
+            "content",
+            "date_updated",
+            "department",
+        ]
 
 
 class Team_ScoreSerializer(serializers.HyperlinkedModelSerializer):

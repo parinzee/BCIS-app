@@ -22,7 +22,7 @@ class PostsViewSet(viewsets.ReadOnlyModelViewSet):
     API endpoint that allows posts to be viewed
     """
 
-    queryset = Post.objects.all().order_by("date_posted").reverse()
+    queryset = Post.objects.all().order_by("date_updated").reverse()
     serializer_class = PostSerializer
     permission_classes = [permissions.AllowAny]
 

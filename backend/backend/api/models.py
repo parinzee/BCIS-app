@@ -28,14 +28,15 @@ class Team_Score(models.Model):
 
 class Post(models.Model):
     title = models.CharField("title", max_length=50)
+    title_emoji = models.CharField("title emoji", max_length=20)
     content = models.TextField("content", max_length=300)
-    date_posted = models.DateTimeField("date posted", auto_now_add=True)
+    date_updated = models.DateTimeField("date updated")
     department = models.CharField(
         "department", choices=DEPARTMENT, max_length=2, blank=True, null=True
     )
 
     def __str__(self) -> str:
-        return f"{self.title} - {self.date_posted}"
+        return f"{self.title} - {self.date_updated}"
 
 
 class PushID(models.Model):
