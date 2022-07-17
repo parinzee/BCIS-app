@@ -16,12 +16,7 @@ export default function NewsItem({ emoji, title, description }: NewsItemProps) {
         <Title>{title}</Title>
         <Title>{emoji}</Title>
       </View>
-      <Markdown
-        // @ts-ignore
-        rules={MarkdownRenderRules}
-      >
-        {description}
-      </Markdown>
+      <Markdown rules={MarkdownRenderRules}>{description}</Markdown>
     </Surface>
   );
 }
