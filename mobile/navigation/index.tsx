@@ -3,7 +3,11 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { Feather, FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import {
+  Feather,
+  FontAwesome,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -97,7 +101,7 @@ function BottomTabNavigator() {
         options={{
           title: "Activities",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="sports-handball" color={color} size={30} />
+            <MaterialCommunityIcons name="handball" color={color} size={30} />
           ),
         }}
       />

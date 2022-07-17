@@ -1,5 +1,7 @@
 import { View, StyleSheet } from "react-native";
-import { Surface, Text, Title } from "react-native-paper";
+import { Surface, Title } from "react-native-paper";
+import Markdown from "react-native-markdown-display";
+import MarkdownRenderRules from "../constants/MarkdownRenderRules";
 
 interface NewsItemProps {
   emoji: string;
@@ -14,6 +16,12 @@ export default function NewsItem({ emoji, title, description }: NewsItemProps) {
         <Title>{title}</Title>
         <Title>{emoji}</Title>
       </View>
+      <Markdown
+        // @ts-ignore
+        rules={MarkdownRenderRules}
+      >
+        {description}
+      </Markdown>
     </Surface>
   );
 }
