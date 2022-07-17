@@ -18,6 +18,7 @@ export default function NewsScreen() {
           description={
             "This is some nice ***text***.\n And a [link!](https://google.com)"
           }
+          dateUpdated={new Date()}
           width={ItemWidth}
         />
       </View>

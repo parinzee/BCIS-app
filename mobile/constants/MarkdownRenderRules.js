@@ -6,9 +6,9 @@ import {
   Platform,
   StyleSheet,
 } from "react-native";
-import { Text } from "react-native-paper";
+import { Paragraph as Text } from "react-native-paper";
 import React from "react";
-import { hasParents, openUrl } from "react-native-markdown-display";
+import { hasParents } from "react-native-markdown-display";
 import textStyleProps from "react-native-markdown-display/src/lib/data/textStyleProps";
 import * as Linking from "expo-linking";
 

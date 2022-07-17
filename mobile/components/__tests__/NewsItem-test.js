@@ -9,6 +9,8 @@ it(`renders correctly`, () => {
         title="Amazing Title"
         emoji="😁"
         description="Test some **bold**, *italic*, and **both** and [links](https://github.com/parinzee)!"
+        dateUpdated={new Date()}
+        width={400}
       />
     )
     .toJSON();
