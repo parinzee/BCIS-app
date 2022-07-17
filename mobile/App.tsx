@@ -2,10 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { Provider as PaperProvider } from "react-native-paper";
+import { Provider as ReduxProvider } from "react-redux";
+
 import useCachedResources from "./hooks/useCachedResources";
 import Navigation from "./navigation";
-
 import useTheme from "./hooks/useTheme";
+import store from "./store";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -16,10 +18,12 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <PaperProvider theme={theme}>
-        <Navigation theme={theme} />
-        <StatusBar />
-      </PaperProvider>
+      <ReduxProvider store={store}>
+        <PaperProvider theme={theme}>
+          <Navigation theme={theme} />
+          <StatusBar />
+        </PaperProvider>
+      </ReduxProvider>
     </SafeAreaProvider>
   );
 }

@@ -50,12 +50,14 @@ const styles = StyleSheet.create({
     borderBottomColor: "#7e7e7e",
   },
   surface: {
+    marginVertical: 20,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
     elevation: 4,
     height: 150,
     maxWidth: 700,
+    alignSelf: "center",
   },
   surfaceLarge: {
     paddingHorizontal: 15,
@@ -65,6 +67,7 @@ const styles = StyleSheet.create({
     height: 150,
   },
   body: {
+    flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
   },

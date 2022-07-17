@@ -43,3 +43,13 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
   >;
 
 export type Theme = typeof LightTheme | typeof DarkTheme;
+
+// Data types
+export interface News {
+  url: string;
+  title: string;
+  title_emoji: string;
+  content: string;
+  date_updated: string;
+  department: string;
+}

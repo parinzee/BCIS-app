@@ -1,6 +1,8 @@
-import { StyleSheet, View } from "react-native";
+import { FlatList, RefreshControl, StyleSheet, View } from "react-native";
 import NewsItem from "../components/NewsItem";
 import useLayout from "../hooks/useLayout";
+import { useGetNewsQuery } from "../slices/apiSlice";
+import { ActivityIndicator, Colors, Title } from "react-native-paper";
 
 export default function NewsScreen() {
   const Layout = useLayout();
@@ -8,22 +10,48 @@ export default function NewsScreen() {
     ? Layout.window.width / 1.5
     : Layout.window.width - 50;
 
-  console.log(ItemWidth);
-  return (
-    <View style={styles.container}>
-      <View>
-        <NewsItem
-          title="Urgent News"
-          emoji="😁"
-          description={
-            "This is some nice ***text***.\n And a [link!](https://google.com)"
-          }
-          dateUpdated={new Date()}
-          width={ItemWidth}
-        />
-      </View>
-    </View>
-  );
+  const {
+    data: news,
+    isLoading,
+    isSuccess,
+    isError,
+    isFetching,
+    refetch,
+  } = useGetNewsQuery();
+
+  let content;
+
+  if (isLoading) {
+    content = (
+      <ActivityIndicator
+        color={Colors.blue300}
+        size={Layout.isLargeDevice ? 70 : 40}
+      />
+    );
+  } else if (isSuccess) {
+    content = (
+      <FlatList
+        data={news}
+        refreshControl={
+          <RefreshControl refreshing={isFetching} onRefresh={refetch} />
+        }
+        renderItem={({ item }) => (
+          <NewsItem
+            title={item.title}
+            emoji={item.title_emoji}
+            description={item.content}
+            dateUpdated={new Date(item.date_updated)}
+            width={ItemWidth}
+          />
+        )}
+        style={{ width: Layout.window.width }}
+      />
+    );
+  } else if (isError) {
+    content = <Title>Unable to get News</Title>;
+  }
+
+  return <View style={styles.container}>{content}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -31,9 +59,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
   },
 });

@@ -5,10 +5,12 @@ exports[`renders correctly 1`] = `
   collapsable={false}
   style={
     Object {
+      "alignSelf": "center",
       "backgroundColor": "#ffffff",
       "borderRadius": 10,
       "elevation": 4,
       "height": 150,
+      "marginVertical": 20,
       "maxWidth": 700,
       "paddingHorizontal": 15,
       "paddingVertical": 10,
@@ -109,6 +111,7 @@ exports[`renders correctly 1`] = `
   <View
     style={
       Object {
+        "flex": 1,
         "flexDirection": "column",
         "justifyContent": "space-between",
       }
@@ -117,6 +120,7 @@ exports[`renders correctly 1`] = `
     <View
       style={
         Object {
+          "flex": 1,
           "flexDirection": "column",
           "justifyContent": "space-between",
         }
