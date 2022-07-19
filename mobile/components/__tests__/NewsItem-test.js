@@ -9,7 +9,7 @@ it(`renders correctly`, () => {
         title="Amazing Title"
         emoji="😁"
         description="Test some **bold**, *italic*, and **both** and [links](https://github.com/parinzee)!"
-        dateUpdated={new Date()}
+        dateUpdated={new Date("2022-07-17T15:22:32Z")}
         width={400}
       />
     )
