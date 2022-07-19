@@ -33,7 +33,13 @@ export default function NewsScreen() {
       <FlatList
         data={news}
         refreshControl={
-          <RefreshControl refreshing={isFetching} onRefresh={refetch} />
+          <RefreshControl
+            refreshing={isFetching}
+            tintColor={Colors.blue300}
+            colors={[Colors.blue300]}
+            // Add timeout to ease the pull-to-refresh
+            onRefresh={refetch}
+          />
         }
         renderItem={({ item }) => (
           <NewsItem
