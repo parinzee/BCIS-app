@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "BCIS",
-    "slug": "BCIS",
+    "slug": "bcis-app",
+    "owner": "parinzee",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

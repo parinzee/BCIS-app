@@ -2,16 +2,6 @@
 
 exports[`renders correctly 1`] = `
 <View
-  accessible={true}
-  collapsable={false}
-  focusable={false}
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -20,32 +10,63 @@ exports[`renders correctly 1`] = `
       "borderRadius": 10,
       "flexDirection": "row",
       "height": 48,
-      "opacity": 1,
+      "marginTop": 10,
       "overflow": "hidden",
       "width": 230,
     }
   }
 >
-  <Image
-    source={1}
-    style={
+  <View
+    accessibilityState={
       Object {
-        "height": 46,
-        "width": 46,
+        "disabled": false,
       }
     }
-  />
-  <Text
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "color": "#000000",
-        "fontSize": 15,
-        "fontWeight": "bold",
-        "marginLeft": 5,
+        "alignItems": "center",
+        "alignSelf": "center",
+        "backgroundColor": "#ffffff",
+        "borderRadius": 10,
+        "flexDirection": "row",
+        "height": 48,
+        "opacity": 1,
+        "overflow": "hidden",
+        "width": 230,
       }
     }
   >
-    Sign In With Google
-  </Text>
+    <Image
+      source={1}
+      style={
+        Object {
+          "height": 46,
+          "width": 46,
+        }
+      }
+    />
+    <Text
+      style={
+        Object {
+          "color": "#000000",
+          "fontSize": 15,
+          "fontWeight": "bold",
+          "marginLeft": 5,
+        }
+      }
+    >
+      Sign In With Google
+    </Text>
+  </View>
 </View>
 `;

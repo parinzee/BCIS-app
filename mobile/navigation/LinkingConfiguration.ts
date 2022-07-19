@@ -21,10 +21,11 @@ const linking: LinkingOptions<RootStackParamList> = {
           Profile: "profile",
         },
       },
+      Login: "login",
       Modal: "modal",
-      NotFound: "*",
     },
   },
 };
 
+console.log(linking);
 export default linking;
