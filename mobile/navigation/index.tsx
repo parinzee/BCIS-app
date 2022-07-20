@@ -20,6 +20,7 @@ import LoginScreen from "../screens/LoginScreen";
 import ModalScreen from "../screens/ModalScreen";
 import HomeScreen from "../screens/HomeScreen";
 import NewsScreen from "../screens/NewsScreen";
+import ActivityScreen from "../screens/ActivityScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
@@ -98,7 +99,7 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Activities"
-        component={NewsScreen}
+        component={ActivityScreen}
         options={{
           title: "Activities",
           tabBarIcon: ({ color }) => (

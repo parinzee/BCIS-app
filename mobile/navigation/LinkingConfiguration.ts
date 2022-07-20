@@ -27,5 +27,4 @@ const linking: LinkingOptions<RootStackParamList> = {
   },
 };
 
-console.log(linking);
 export default linking;

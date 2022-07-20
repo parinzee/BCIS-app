@@ -12,9 +12,11 @@
     "lint": "eslint ."
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "setupFilesAfterEnv": ["./jest-setup.js"]
   },
   "dependencies": {
+    "@03balogun/react-native-skeleton-content": "^1.0.25",
     "@aws-sdk/client-cognito-identity": "^3.131.0",
     "@aws-sdk/credential-provider-cognito-identity": "^3.131.0",
     "@expo/vector-icons": "^13.0.0",
@@ -41,6 +43,7 @@
     "react-native": "0.68.2",
     "react-native-markdown-display": "github:parinzee/react-native-markdown-display",
     "react-native-paper": "^4.12.2",
+    "react-native-reanimated": "~2.8.0",
     "react-native-safe-area-context": "4.2.4",
     "react-native-screens": "~3.11.1",
     "react-native-web": "0.17.7",

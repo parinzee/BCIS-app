@@ -8,7 +8,7 @@ exports[`renders correctly 1`] = `
       "alignSelf": "center",
       "backgroundColor": "#ffffff",
       "borderRadius": 10,
-      "elevation": 4,
+      "elevation": 8,
       "height": 150,
       "marginVertical": 20,
       "maxWidth": 700,
@@ -16,11 +16,11 @@ exports[`renders correctly 1`] = `
       "paddingVertical": 10,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 3,
+        "height": 7,
         "width": 0,
       },
       "shadowOpacity": 0.24,
-      "shadowRadius": 4,
+      "shadowRadius": 8,
       "width": 400,
     }
   }

@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 10,
-    elevation: 4,
+    elevation: 8,
     height: 150,
     maxWidth: 700,
     alignSelf: "center",
