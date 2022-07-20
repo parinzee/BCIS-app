@@ -1,5 +1,13 @@
 import { useWindowDimensions } from "react-native";
 
+interface layout {
+  window: {
+    height: number;
+    width: number;
+  };
+  isLargeDevice: boolean;
+}
+
 export default function useLayout() {
   const { height, width } = useWindowDimensions();
 
@@ -11,3 +19,5 @@ export default function useLayout() {
     isLargeDevice: width > 775,
   };
 }
+
+export { layout };

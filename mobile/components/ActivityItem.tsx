@@ -1,17 +1,12 @@
-import {
-  StyleSheet,
-  View,
-  Image,
-  ImageBackground,
-  Pressable,
-} from "react-native";
-import { Caption, Headline, Surface, Text, Title } from "react-native-paper";
+import { StyleSheet, View, ImageBackground, Pressable } from "react-native";
+import { Caption, Surface, Title } from "react-native-paper";
 import Markdown from "react-native-markdown-display";
 import MarkdownRenderRules from "../constants/MarkdownRenderRules";
 import * as React from "react";
 import SkeletonContent from "@03balogun/react-native-skeleton-content";
 import { FontAwesome } from "@expo/vector-icons";
 import * as Linking from "expo-linking";
+import { layout } from "../hooks/useLayout";
 
 interface ActivityItemProps {
   thumbnailURL: string;
@@ -21,6 +16,7 @@ interface ActivityItemProps {
   updatedDate: Date;
   videoURL: string | null;
   content: string;
+  layout: layout;
 }
 
 const monthNames = [
@@ -46,6 +42,7 @@ export default function ActivityItem({
   updatedDate,
   content,
   videoURL,
+  layout,
 }: ActivityItemProps) {
   const [imageEncoding, setImageEncoding] = React.useState<string | null>(null);
 
@@ -69,16 +66,22 @@ export default function ActivityItem({
         }
       }}
     >
-      <Surface style={styles.surface}>
+      <Surface
+        style={layout.isLargeDevice ? styles.surfaceLarge : styles.surface}
+      >
         <SkeletonContent
           isLoading={imageEncoding == null}
-          containerStyle={styles.thumbnail}
+          containerStyle={
+            layout.isLargeDevice ? styles.thumbnailLarge : styles.thumbnail
+          }
         >
           <ImageBackground
             // Here we type cast, since SkeletonContent won't render the component if
             // isLoading is true
             source={{ uri: imageEncoding as string }}
-            style={styles.thumbnail}
+            style={
+              layout.isLargeDevice ? styles.thumbnailLarge : styles.thumbnail
+            }
           >
             {videoURL != null ? (
               <FontAwesome name="play" size={50} color="red" />
@@ -98,7 +101,9 @@ export default function ActivityItem({
                     timeStyle: "short",
                   })}
                 </Caption>
-                <View style={{ width: 240 }}>
+                <View
+                  style={layout.isLargeDevice ? { width: 340 } : { width: 240 }}
+                >
                   <Markdown rules={MarkdownRenderRules} style={styles}>
                     {content}
                   </Markdown>
@@ -131,6 +136,19 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     alignItems: "center",
     justifyContent: "center",
+    overflow: "hidden",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  thumbnailLarge: {
+    width: 450,
+    height: 240,
+    marginBottom: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
   surface: {
     marginVertical: 20,
@@ -140,7 +158,16 @@ const styles = StyleSheet.create({
     width: 350,
     maxWidth: 700,
     alignSelf: "center",
-    overflow: "hidden",
+    flexDirection: "column",
+  },
+  surfaceLarge: {
+    marginVertical: 20,
+    borderRadius: 10,
+    elevation: 8,
+    height: 400,
+    width: 450,
+    maxWidth: 700,
+    alignSelf: "center",
     flexDirection: "column",
   },
   innerContainer: {
@@ -158,11 +185,10 @@ const styles = StyleSheet.create({
   },
   dateText: {
     fontWeight: "900",
-    marginVertical: 0,
+    marginVertical: -3,
     textAlign: "center",
   },
   dateTextContainer: {
     flexDirection: "column",
-    justifyContent: "center",
   },
 });

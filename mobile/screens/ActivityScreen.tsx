@@ -1,7 +1,9 @@
 import { StyleSheet, View } from "react-native";
 import ActivityItem from "../components/ActivityItem";
+import useLayout from "../hooks/useLayout";
 
 export default function ActivityScreen() {
+  const layout = useLayout();
   return (
     <View style={styles.container}>
       <ActivityItem
@@ -10,8 +12,9 @@ export default function ActivityScreen() {
         title="BCIS vs ASCOT"
         updatedDate={new Date()}
         activityDate={new Date()}
-        content="HEY I WANT TO BREASKKKKKKK FREEEEEE I WANT TO BREAK FREEE"
+        content="HEY I WANT TO BREASKKKKKKK FREEEEEE I WANT TO BREAK FREEE AAAAAAAAAAAA AJKJKJKJJKJKJKJK "
         videoURL="https://www.youtube.com/watch?v=UJWk_KNbDHo&list=RDGTWqwSNQCcg&index=12"
+        layout={layout}
       />
     </View>
   );
