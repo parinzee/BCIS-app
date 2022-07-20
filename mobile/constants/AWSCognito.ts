@@ -66,6 +66,9 @@ const refreshTokens = async (refreshToken: string) => {
       await SecureStore.setItemAsync(key, value);
     }
   }
+
+  // Set last refresh
+  await SecureStore.setItemAsync("last_refresh", new Date().toISOString());
 };
 
 const handleGoogleCognitoCallback = async (event: Linking.EventType) => {
@@ -116,10 +119,6 @@ const handleCogntioLogin = async (email: string, password: string) => {
       );
     },
   });
-
-  await refreshTokens(
-    (await SecureStore.getItemAsync("refresh_token")) as string
-  );
 };
 
 export {
@@ -127,4 +126,5 @@ export {
   handleGoogleCognitoCallback,
   handleCogntioRegister,
   handleCogntioLogin,
+  refreshTokens,
 };

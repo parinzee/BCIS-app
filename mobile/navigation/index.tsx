@@ -47,12 +47,12 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{ headerShown: false }}
-      />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ headerShown: true }}
+        />
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>

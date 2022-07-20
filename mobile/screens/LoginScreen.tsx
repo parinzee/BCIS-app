@@ -1,15 +1,30 @@
-import { KeyboardAvoidingView, StyleSheet, View, Image } from "react-native";
+import {
+  KeyboardAvoidingView,
+  StyleSheet,
+  View,
+  Image,
+  StatusBar,
+} from "react-native";
 import * as React from "react";
 import SignInWithGoogle from "../components/SignInWithGoogle";
-import { Caption, HelperText, TextInput } from "react-native-paper";
+import {
+  Caption,
+  HelperText,
+  Subheading,
+  TextInput,
+  Title,
+  Text,
+} from "react-native-paper";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "react-native-paper";
 import {
   handleCogntioLogin,
   handleCogntioRegister,
 } from "../constants/AWSCognito";
+import { useHeaderHeight } from "@react-navigation/elements";
 
 export default function LoginScreen() {
+  const headerHeight = useHeaderHeight();
   const {
     control,
     handleSubmit,
@@ -22,11 +37,23 @@ export default function LoginScreen() {
   });
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior="padding"
+      keyboardVerticalOffset={
+        StatusBar?.currentHeight == undefined
+          ? headerHeight
+          : headerHeight + StatusBar.currentHeight
+      }
+    >
       <Image
         source={require("../assets/images/bcis_logo.png")}
         style={styles.logo}
       />
+      <View>
+        <Subheading style={styles.title}>BCIS SC — LINK</Subheading>
+        <Text style={styles.subheading}>By Parin</Text>
+      </View>
       <Controller
         control={control}
         rules={{
@@ -91,7 +118,9 @@ export default function LoginScreen() {
           Sign Up
         </Button>
       </View>
-      <Caption style={{ fontSize: 15 }}>Or</Caption>
+      <View>
+        <Caption style={styles.caption}>Or</Caption>
+      </View>
       <SignInWithGoogle />
     </KeyboardAvoidingView>
   );
@@ -108,8 +137,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     marginBottom: 15,
   },
   textInput: {
@@ -125,5 +154,16 @@ const styles = StyleSheet.create({
   },
   helperText: {
     textAlign: "left",
+  },
+  title: {
+    fontWeight: "800",
+    textAlign: "center",
+  },
+  subheading: {
+    textAlign: "center",
+  },
+  caption: {
+    fontSize: 15,
+    textAlign: "center",
   },
 });
