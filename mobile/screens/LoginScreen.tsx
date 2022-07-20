@@ -1,9 +1,13 @@
 import { KeyboardAvoidingView, StyleSheet, View, Image } from "react-native";
 import * as React from "react";
 import SignInWithGoogle from "../components/SignInWithGoogle";
-import { Caption, Divider, TextInput } from "react-native-paper";
+import { Caption, HelperText, TextInput } from "react-native-paper";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "react-native-paper";
+import {
+  handleCogntioLogin,
+  handleCogntioRegister,
+} from "../constants/AWSCognito";
 
 export default function LoginScreen() {
   const {
@@ -26,7 +30,7 @@ export default function LoginScreen() {
       <Controller
         control={control}
         rules={{
-          required: true,
+          pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
@@ -37,15 +41,20 @@ export default function LoginScreen() {
             onChangeText={onChange}
             style={styles.textInput}
             textContentType="emailAddress"
+            autoCapitalize="none"
           />
         )}
         name="email"
       />
+      <HelperText type="error" visible={errors.email?.type == "pattern"}>
+        Email is invalid
+      </HelperText>
 
       <Controller
         control={control}
         rules={{
           required: true,
+          minLength: 8,
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <TextInput
@@ -61,9 +70,26 @@ export default function LoginScreen() {
         )}
         name="password"
       />
+      <HelperText type="error" visible={errors.password?.type == "minLength"}>
+        Password must be more than 8 characters
+      </HelperText>
       <View style={styles.buttonContainer}>
-        <Button mode="contained">Sign In</Button>
-        <Button mode="contained">Sign Up</Button>
+        <Button
+          mode="contained"
+          onPress={handleSubmit((data) => {
+            handleCogntioLogin(data.email, data.password);
+          })}
+        >
+          Sign In
+        </Button>
+        <Button
+          mode="contained"
+          onPress={handleSubmit((data) => {
+            handleCogntioRegister(data.email, data.password);
+          })}
+        >
+          Sign Up
+        </Button>
       </View>
       <Caption style={{ fontSize: 15 }}>Or</Caption>
       <SignInWithGoogle />
@@ -96,5 +122,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  helperText: {
+    textAlign: "left",
   },
 });

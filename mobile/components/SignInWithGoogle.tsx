@@ -32,7 +32,7 @@ export default function SignInWithGoogle() {
           style={styles.logo}
         />
         {!isLoading ? (
-          <Text style={styles.text}>Sign In With Google</Text>
+          <Text style={styles.text}>Continue With Google</Text>
         ) : (
           <ActivityIndicator />
         )}
