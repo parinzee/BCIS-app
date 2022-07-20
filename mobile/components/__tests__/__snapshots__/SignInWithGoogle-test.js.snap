@@ -65,7 +65,7 @@ exports[`renders correctly 1`] = `
         }
       }
     >
-      Sign In With Google
+      Continue With Google
     </Text>
   </View>
 </View>
