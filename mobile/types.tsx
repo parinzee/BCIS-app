@@ -50,5 +50,5 @@ export interface News {
   emoji: string;
   content: string;
   date_updated: string;
-  department: string;
+  department: "K" | "E" | "H";
 }

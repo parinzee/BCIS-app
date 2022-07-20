@@ -10,7 +10,7 @@ export default function ActivityScreen() {
         title="BCIS vs ASCOT"
         updatedDate={new Date()}
         activityDate={new Date()}
-        description="HEY I WANT TO BREASKKKKKKK FREEEEEE I WANT TO BREAK FREEE"
+        content="HEY I WANT TO BREASKKKKKKK FREEEEEE I WANT TO BREAK FREEE"
         videoURL="https://www.youtube.com/watch?v=UJWk_KNbDHo&list=RDGTWqwSNQCcg&index=12"
       />
     </View>

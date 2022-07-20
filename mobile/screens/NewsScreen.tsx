@@ -45,8 +45,9 @@ export default function NewsScreen() {
           <NewsItem
             title={item.title}
             emoji={item.emoji}
-            description={item.content}
+            content={item.content}
             dateUpdated={new Date(item.date_updated)}
+            department={item.department}
             width={ItemWidth}
           />
         )}

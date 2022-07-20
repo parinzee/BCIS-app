@@ -1,23 +1,37 @@
 import { View, StyleSheet } from "react-native";
-import { Caption, Surface, Title } from "react-native-paper";
+import { Caption, Colors, Surface, Title } from "react-native-paper";
 import Markdown from "react-native-markdown-display";
 import MarkdownRenderRules from "../constants/MarkdownRenderRules";
 
 interface NewsItemProps {
   emoji: string;
   title: string;
-  description: string;
+  content: string;
   dateUpdated: Date;
   width: number;
+  department: "K" | "E" | "H";
 }
 
 export default function NewsItem({
   emoji,
   title,
-  description,
+  content,
   dateUpdated,
   width,
+  department,
 }: NewsItemProps) {
+  let borderColor;
+
+  if (department == "K") {
+    borderColor = Colors.orange600;
+  } else if (department == "E") {
+    borderColor = Colors.green600;
+  } else if (department == "H") {
+    borderColor = Colors.lightBlue600;
+  } else {
+    borderColor = "#7e7e7e";
+  }
+
   return (
     <Surface
       style={{
@@ -25,13 +39,13 @@ export default function NewsItem({
         width: width,
       }}
     >
-      <View style={styles.titleBar}>
+      <View style={{ ...styles.titleBar, borderBottomColor: borderColor }}>
         <Title>{title}</Title>
         <Title>{emoji}</Title>
       </View>
       <View style={styles.body}>
         <Markdown rules={MarkdownRenderRules} style={styles}>
-          {description}
+          {content}
         </Markdown>
         <Caption style={styles.datePosted}>
           Posted{" "}
@@ -47,7 +61,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     borderBottomWidth: 1.25,
-    borderBottomColor: "#7e7e7e",
   },
   surface: {
     marginVertical: 20,

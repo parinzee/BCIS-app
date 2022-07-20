@@ -28,7 +28,7 @@ exports[`renders correctly 1`] = `
   <View
     style={
       Object {
-        "borderBottomColor": "#7e7e7e",
+        "borderBottomColor": "#fb8c00",
         "borderBottomWidth": 1.25,
         "flexDirection": "row",
         "justifyContent": "space-between",

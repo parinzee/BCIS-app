@@ -8,7 +8,8 @@ it(`renders correctly`, () => {
       <NewsItem
         title="Amazing Title"
         emoji="😁"
-        description="Test some **bold**, *italic*, and **both** and [links](https://github.com/parinzee)!"
+        content="Test some **bold**, *italic*, and **both** and [links](https://github.com/parinzee)!"
+        department="K"
         dateUpdated={new Date("2022-07-17T15:22:32Z")}
         width={400}
       />

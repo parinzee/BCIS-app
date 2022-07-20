@@ -20,7 +20,7 @@ interface ActivityItemProps {
   activityDate: Date;
   updatedDate: Date;
   videoURL: string | null;
-  description: string;
+  content: string;
 }
 
 const monthNames = [
@@ -44,7 +44,7 @@ export default function ActivityItem({
   title,
   activityDate,
   updatedDate,
-  description,
+  content,
   videoURL,
 }: ActivityItemProps) {
   const [imageEncoding, setImageEncoding] = React.useState<string | null>(null);
@@ -100,7 +100,7 @@ export default function ActivityItem({
                 </Caption>
                 <View style={{ width: 240 }}>
                   <Markdown rules={MarkdownRenderRules} style={styles}>
-                    {description}
+                    {content}
                   </Markdown>
                 </View>
               </View>
