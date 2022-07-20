@@ -13,7 +13,7 @@ interface ActivityItemProps {
   emoji: string;
   title: string;
   activityDate: Date;
-  updatedDate: Date;
+  dateUpdated: Date;
   videoURL: string | null;
   content: string;
   layout: layout;
@@ -39,7 +39,7 @@ export default function ActivityItem({
   emoji,
   title,
   activityDate,
-  updatedDate,
+  dateUpdated,
   content,
   videoURL,
   layout,
@@ -96,7 +96,7 @@ export default function ActivityItem({
                 <Title style={styles.eventText}>{title}</Title>
                 <Caption>
                   Posted{" "}
-                  {updatedDate.toLocaleString("en-us", {
+                  {dateUpdated.toLocaleString("en-us", {
                     dateStyle: "medium",
                     timeStyle: "short",
                   })}

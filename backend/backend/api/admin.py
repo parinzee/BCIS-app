@@ -9,5 +9,6 @@ admin.site.register(
         models.Student,
         models.News,
         models.Team_Score,
+        models.Activity,
     ]
 )

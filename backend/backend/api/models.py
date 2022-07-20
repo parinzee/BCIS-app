@@ -29,11 +29,24 @@ class Team_Score(models.Model):
 class News(models.Model):
     title = models.CharField("title", max_length=50)
     emoji = models.CharField("title emoji", max_length=20)
-    content = models.TextField("content", max_length=300)
+    content = models.TextField("content", max_length=150)
     date_updated = models.DateTimeField("date updated")
     department = models.CharField(
         "department", choices=DEPARTMENT, max_length=2, blank=True, null=True
     )
+
+    def __str__(self) -> str:
+        return f"{self.title} - {self.date_updated}"
+
+
+class Activity(models.Model):
+    title = models.CharField("title", max_length=50)
+    emoji = models.CharField("title emoji", max_length=20)
+    content = models.TextField("content", max_length=83)
+    date_updated = models.DateTimeField("date updated")
+    activity_date = models.DateTimeField("date of activity")
+    thumbnail_URL = models.URLField("thumbnail url")
+    video_URL = models.URLField("video url", blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.title} - {self.date_updated}"
