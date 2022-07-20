@@ -52,3 +52,14 @@ export interface News {
   date_updated: string;
   department: "K" | "E" | "H";
 }
+
+export interface Activity {
+  url: string;
+  title: string;
+  emoji: string;
+  content: string;
+  date_updated: string;
+  activity_date: string;
+  thumbnail_URL: string;
+  video_URL: string | null;
+}

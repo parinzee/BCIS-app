@@ -18,7 +18,7 @@ class NewsSerializer(serializers.HyperlinkedModelSerializer):
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Activity
-        fioelds = "__all__"
+        fields = "__all__"
 
 
 class Team_ScoreSerializer(serializers.HyperlinkedModelSerializer):

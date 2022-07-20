@@ -1,23 +1,63 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 import ActivityItem from "../components/ActivityItem";
 import useLayout from "../hooks/useLayout";
+import { ActivityIndicator, Colors, Title } from "react-native-paper";
+import { useGetActivitiesQuery } from "../slices/apiSlice";
 
 export default function ActivityScreen() {
   const layout = useLayout();
-  return (
-    <View style={styles.container}>
-      <ActivityItem
-        thumbnailURL="https://images.unsplash.com/photo-1594623274890-6b45ce7cf44a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=4170&q=80"
-        emoji="🏀"
-        title="BCIS vs ASCOT"
-        dateUpdated={new Date()}
-        activityDate={new Date()}
-        content="HEY I WANT TO BREASKKKKKKK FREEEEEE I WANT TO BREAK FREEE AAAAAAAAAAAA AJKJKJKJJKJKJKJK "
-        videoURL="https://www.youtube.com/watch?v=UJWk_KNbDHo&list=RDGTWqwSNQCcg&index=12"
-        layout={layout}
+
+  const {
+    data: news,
+    isLoading,
+    isSuccess,
+    isError,
+    isFetching,
+    refetch,
+  } = useGetActivitiesQuery();
+
+  let content;
+
+  if (isLoading) {
+    content = (
+      <ActivityIndicator
+        color={Colors.blue300}
+        size={layout.isLargeDevice ? 70 : 40}
       />
-    </View>
-  );
+    );
+  } else if (isSuccess) {
+    content = (
+      <FlatList
+        data={news}
+        refreshControl={
+          <RefreshControl
+            refreshing={isFetching}
+            tintColor={Colors.blue300}
+            colors={[Colors.blue300]}
+            // Add timeout to ease the pull-to-refresh
+            onRefresh={refetch}
+          />
+        }
+        renderItem={({ item }) => (
+          <ActivityItem
+            title={item.title}
+            emoji={item.emoji}
+            content={item.content}
+            dateUpdated={new Date(item.date_updated)}
+            activityDate={new Date(item.activity_date)}
+            thumbnailURL={item.thumbnail_URL}
+            videoURL={item.video_URL}
+            layout={layout}
+          />
+        )}
+        style={{ width: layout.window.width }}
+      />
+    );
+  } else if (isError) {
+    content = <Title>Unable to get News</Title>;
+  }
+
+  return <View style={styles.container}>{content}</View>;
 }
 
 const styles = StyleSheet.create({

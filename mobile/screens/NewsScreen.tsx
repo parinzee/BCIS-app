@@ -5,10 +5,10 @@ import { useGetNewsQuery } from "../slices/apiSlice";
 import { ActivityIndicator, Colors, Title } from "react-native-paper";
 
 export default function NewsScreen() {
-  const Layout = useLayout();
-  const ItemWidth = Layout.isLargeDevice
-    ? Layout.window.width / 1.5
-    : Layout.window.width - 50;
+  const layout = useLayout();
+  const ItemWidth = layout.isLargeDevice
+    ? layout.window.width / 1.5
+    : layout.window.width - 50;
 
   const {
     data: news,
@@ -25,7 +25,7 @@ export default function NewsScreen() {
     content = (
       <ActivityIndicator
         color={Colors.blue300}
-        size={Layout.isLargeDevice ? 70 : 40}
+        size={layout.isLargeDevice ? 70 : 40}
       />
     );
   } else if (isSuccess) {
@@ -51,7 +51,7 @@ export default function NewsScreen() {
             width={ItemWidth}
           />
         )}
-        style={{ width: Layout.window.width }}
+        style={{ width: layout.window.width }}
       />
     );
   } else if (isError) {
