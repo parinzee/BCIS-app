@@ -28,7 +28,7 @@ class Team_Score(models.Model):
 
 class News(models.Model):
     title = models.CharField("title", max_length=50)
-    title_emoji = models.CharField("title emoji", max_length=20)
+    emoji = models.CharField("title emoji", max_length=20)
     content = models.TextField("content", max_length=300)
     date_updated = models.DateTimeField("date updated")
     department = models.CharField(

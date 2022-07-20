@@ -15,7 +15,7 @@ class NewsSerializer(serializers.HyperlinkedModelSerializer):
         fields = [
             "url",
             "title",
-            "title_emoji",
+            "emoji",
             "content",
             "date_updated",
             "department",

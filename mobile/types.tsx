@@ -47,7 +47,7 @@ export type Theme = typeof LightTheme | typeof DarkTheme;
 export interface News {
   url: string;
   title: string;
-  title_emoji: string;
+  emoji: string;
   content: string;
   date_updated: string;
   department: string;
