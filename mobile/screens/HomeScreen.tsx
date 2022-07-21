@@ -1,6 +1,8 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import { Text } from "react-native-paper";
 import FeaturedItemCarousel from "../components/FeaturedItemCarousel";
+import TopNews from "../components/TopNews";
+import TopActivity from "../components/TopActivity";
 import VerseOfDay from "../components/VerseOfDay";
 import useLayout from "../hooks/useLayout";
 
@@ -9,7 +11,7 @@ import { RootTabScreenProps } from "../types";
 export default function HomeScreen({ navigation }: RootTabScreenProps<"Home">) {
   const layout = useLayout();
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <FeaturedItemCarousel layout={layout} />
       <View
         style={
@@ -19,9 +21,11 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<"Home">) {
         }
       >
         <Text style={styles.greeting}> Hello there,</Text>
-        <VerseOfDay />
+        <VerseOfDay layout={layout} />
+        <TopNews layout={layout} />
+        <TopActivity layout={layout} />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -33,6 +37,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_600SemiBold",
     paddingHorizontal: 10,
     fontSize: 30,
+    marginBottom: 10,
   },
   title: {
     fontSize: 20,

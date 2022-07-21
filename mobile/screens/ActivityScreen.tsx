@@ -9,7 +9,7 @@ export default function ActivityScreen() {
   const itemWidth = layout.isSmallDevice ? 315 : 350;
 
   const {
-    data: news,
+    data: activities,
     isLoading,
     isSuccess,
     isError,
@@ -32,7 +32,7 @@ export default function ActivityScreen() {
         // Specify an arbitary key to force FlatList refresh
         // when layout.isNotSmallDevice may change when rotating screens
         key={layout.isMediumDevice || layout.isLargeDevice ? "_" : "#"}
-        data={news}
+        data={activities}
         numColumns={layout.isMediumDevice || layout.isLargeDevice ? 2 : 1}
         refreshControl={
           <RefreshControl

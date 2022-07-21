@@ -1,20 +1,29 @@
 import SkeletonContent from "@03balogun/react-native-skeleton-content";
 import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { Surface } from "react-native-paper";
+import { layout } from "../hooks/useLayout";
 import { useGetVerseOfDayQuery } from "../slices/apiSlice";
 
-export default function VerseOfDay() {
+interface VerseOfDayProps {
+  layout: layout;
+}
+
+export default function VerseOfDay({ layout }: VerseOfDayProps) {
   const { data: votd, isSuccess } = useGetVerseOfDayQuery();
+  const itemWidth = layout.isSmallDevice ? 315 : 350;
+
   let content = (
     <SkeletonContent isLoading={true} containerStyle={styles.container} />
   );
 
   if (isSuccess) {
     content = (
-      <Surface style={styles.container}>
+      <Surface
+        style={{ ...styles.container, width: itemWidth, marginBottom: 20 }}
+      >
         <ImageBackground
           source={{ uri: votd.bg_URL }}
-          style={{ ...styles.container, overflow: "hidden" }}
+          style={{ ...styles.container, overflow: "hidden", width: itemWidth }}
         >
           <View style={styles.innerContainer}>
             <Text
@@ -49,14 +58,12 @@ export default function VerseOfDay() {
 
 const styles = StyleSheet.create({
   container: {
-    width: 310,
     height: 200,
     alignSelf: "center",
     elevation: 8,
     borderRadius: 10,
   },
   innerContainer: {
-    width: 310,
     height: 200,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     borderRadius: 10,

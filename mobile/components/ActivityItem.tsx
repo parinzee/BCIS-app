@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
     borderBottomColor: "#7e7e7e",
   },
   thumbnail: {
-    width: 350,
     height: 140,
     marginBottom: 5,
     alignItems: "center",
@@ -137,7 +136,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 8,
     height: 300,
-    width: 350,
     marginHorizontal: 10,
     maxWidth: 700,
     alignSelf: "center",

@@ -15,6 +15,12 @@ export default function FeaturedItemCarousel({
 }: FeaturedItemCarouselProps) {
   const { data: featured, isSuccess, isError } = useGetFeaturedQuery();
 
+  let scrollingOffset = 150;
+
+  if (layout.isMediumDevice || layout.isLargeDevice) {
+    scrollingOffset = 450;
+  }
+
   let content = (
     <SkeletonContent
       isLoading={true}
@@ -30,8 +36,7 @@ export default function FeaturedItemCarousel({
         data={featured}
         width={layout.window.width}
         modeConfig={{
-          parallaxScrollingOffset:
-            layout.isMediumDevice || layout.isLargeDevice ? 600 : 150,
+          parallaxScrollingOffset: scrollingOffset,
           parallaxScrollingScale: 0.8,
         }}
         autoPlay={true}
