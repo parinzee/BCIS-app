@@ -78,7 +78,19 @@ export default function ActivityItem({
             style={{ ...styles.thumbnail, width: width }}
           >
             {videoURL != null ? (
-              <FontAwesome name="play" size={50} color="red" />
+              <View
+                style={{
+                  width: 70,
+                  height: 70,
+                  borderRadius: 100,
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  alignItems: "center",
+                  alignContent: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <FontAwesome name="play" size={40} color="red" />
+              </View>
             ) : null}
           </ImageBackground>
         </SkeletonContent>
