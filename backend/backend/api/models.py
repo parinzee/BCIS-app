@@ -1,4 +1,5 @@
 from django.db import models
+from colorfield.fields import ColorField
 from django.contrib.auth.models import User
 
 
@@ -50,6 +51,17 @@ class Activity(models.Model):
 
     def __str__(self) -> str:
         return f"{self.title} - {self.date_updated}"
+
+
+class Featured(models.Model):
+    title = models.CharField("title", max_length=30)
+    emoji = models.CharField("title emoji", max_length=20)
+    redirect_URI = models.URLField("redirect URI")
+    bg_color1 = ColorField(default="#FFFFFF")
+    bg_color2 = ColorField(default="#FFFFFF")
+
+    def __str__(self) -> str:
+        return f"{self.emoji} - {self.title}"
 
 
 class PushID(models.Model):

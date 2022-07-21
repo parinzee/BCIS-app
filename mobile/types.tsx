@@ -63,3 +63,12 @@ export interface Activity {
   thumbnail_URL: string;
   video_URL: string | null;
 }
+
+export interface Featured {
+  url: string;
+  title: string;
+  emoji: string;
+  redirect_URI: string;
+  bg_color1: string;
+  bg_color2: string;
+}

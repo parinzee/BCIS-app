@@ -10,5 +10,6 @@ admin.site.register(
         models.News,
         models.Team_Score,
         models.Activity,
+        models.Featured,
     ]
 )

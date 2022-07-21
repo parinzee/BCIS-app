@@ -3,8 +3,13 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from .serializers import UserSerializer, NewsSerializer, ActivitySerializer
-from .models import News, Team_Score, Activity
+from .serializers import (
+    FeaturedSerializer,
+    UserSerializer,
+    NewsSerializer,
+    ActivitySerializer,
+)
+from .models import Featured, News, Team_Score, Activity
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -34,6 +39,16 @@ class ActivityViewSet(viewsets.ReadOnlyModelViewSet):
 
     queryset = Activity.objects.all().order_by("date_updated").reverse()
     serializer_class = ActivitySerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class FeaturedViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint that allows the featured news to be viewed
+    """
+
+    queryset = Featured.objects.all()
+    serializer_class = FeaturedSerializer
     permission_classes = [permissions.AllowAny]
 
 
