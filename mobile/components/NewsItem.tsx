@@ -9,7 +9,7 @@ interface NewsItemProps {
   content: string;
   dateUpdated: Date;
   width: number;
-  department: "K" | "E" | "H";
+  department: "K" | "E" | "H" | null;
 }
 
 export default function NewsItem({
@@ -44,12 +44,20 @@ export default function NewsItem({
         <Title>{emoji}</Title>
       </View>
       <View style={styles.body}>
-        <Markdown rules={MarkdownRenderRules} style={styles}>
+        <Markdown
+          rules={MarkdownRenderRules}
+          style={{
+            paragraph: { marginTop: 0, marginBottom: 0 },
+          }}
+        >
           {content}
         </Markdown>
         <Caption style={styles.datePosted}>
           Posted{" "}
-          {`${dateUpdated.getDate()}/${dateUpdated.getMonth()}/${dateUpdated.getFullYear()}`}
+          {dateUpdated.toLocaleString("en-us", {
+            dateStyle: "medium",
+            timeStyle: "short",
+          })}
         </Caption>
       </View>
     </Surface>
@@ -71,21 +79,15 @@ const styles = StyleSheet.create({
     height: 150,
     maxWidth: 700,
     alignSelf: "center",
-  },
-  surfaceLarge: {
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 10,
-    elevation: 4,
-    height: 150,
+    marginHorizontal: 10,
   },
   body: {
     flex: 1,
     flexDirection: "column",
     justifyContent: "space-between",
+    overflow: "hidden",
   },
   datePosted: {
-    flex: 0,
     textAlign: "right",
   },
   link: {

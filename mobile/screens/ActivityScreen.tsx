@@ -6,7 +6,7 @@ import { useGetActivitiesQuery } from "../slices/apiSlice";
 
 export default function ActivityScreen() {
   const layout = useLayout();
-  console.log(layout);
+  const itemWidth = layout.isSmallDevice ? 315 : 350;
 
   const {
     data: news,
@@ -31,9 +31,9 @@ export default function ActivityScreen() {
       <FlatList
         // Specify an arbitary key to force FlatList refresh
         // when layout.isNotSmallDevice may change when rotating screens
-        key={layout.isNotSmallDevice ? "_" : "#"}
+        key={layout.isMediumDevice || layout.isLargeDevice ? "_" : "#"}
         data={news}
-        numColumns={layout.isNotSmallDevice ? 2 : 1}
+        numColumns={layout.isMediumDevice || layout.isLargeDevice ? 2 : 1}
         refreshControl={
           <RefreshControl
             refreshing={isFetching}
@@ -53,6 +53,7 @@ export default function ActivityScreen() {
             activityDate={new Date(item.activity_date)}
             thumbnailURL={item.thumbnail_URL}
             videoURL={item.video_URL}
+            width={itemWidth}
           />
         )}
         style={{ width: layout.window.width }}

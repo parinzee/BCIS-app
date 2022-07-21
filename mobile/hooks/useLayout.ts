@@ -6,7 +6,8 @@ interface layout {
     width: number;
   };
   isLargeDevice: boolean;
-  isNotSmallDevice: boolean;
+  isMediumDevice: boolean;
+  isSmallDevice: boolean;
 }
 
 export default function useLayout(): layout {
@@ -17,8 +18,10 @@ export default function useLayout(): layout {
       height,
       width,
     },
+    // Breakpoint styling
     isLargeDevice: width > 775,
-    isNotSmallDevice: width > 740,
+    isMediumDevice: width > 740 && width <= 775,
+    isSmallDevice: width < 350,
   };
 }
 

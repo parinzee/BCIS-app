@@ -247,7 +247,7 @@ const MarkdownRenderRules = {
   link: (node, children, parent, styles, onLinkPress) => (
     <Text
       key={node.key}
-      style={styles.link}
+      style={{ ...styles.link, color: "#4286f4" }}
       onPress={() => Linking.openURL(node.attributes.href)}
     >
       {children}

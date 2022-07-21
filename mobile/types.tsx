@@ -50,7 +50,7 @@ export interface News {
   emoji: string;
   content: string;
   date_updated: string;
-  department: "K" | "E" | "H";
+  department: "K" | "E" | "H" | null;
 }
 
 export interface Activity {

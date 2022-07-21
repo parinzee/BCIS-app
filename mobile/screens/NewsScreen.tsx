@@ -6,9 +6,7 @@ import { ActivityIndicator, Colors, Title } from "react-native-paper";
 
 export default function NewsScreen() {
   const layout = useLayout();
-  const ItemWidth = layout.isLargeDevice
-    ? layout.window.width / 1.5
-    : layout.window.width - 50;
+  const itemWidth = layout.isSmallDevice ? 315 : 350;
 
   const {
     data: news,
@@ -31,6 +29,10 @@ export default function NewsScreen() {
   } else if (isSuccess) {
     content = (
       <FlatList
+        // Arbitary key to force re-render when layout.isLargeDevice
+        // may change due to device rotation
+        key={layout.isMediumDevice || layout.isLargeDevice ? "$" : "%"}
+        numColumns={layout.isMediumDevice || layout.isLargeDevice ? 2 : 1}
         data={news}
         refreshControl={
           <RefreshControl
@@ -43,15 +45,17 @@ export default function NewsScreen() {
         }
         renderItem={({ item }) => (
           <NewsItem
+            key={item.title}
             title={item.title}
             emoji={item.emoji}
             content={item.content}
             dateUpdated={new Date(item.date_updated)}
             department={item.department}
-            width={ItemWidth}
+            width={itemWidth}
           />
         )}
         style={{ width: layout.window.width }}
+        contentContainerStyle={{ alignItems: "center" }}
       />
     );
   } else if (isError) {

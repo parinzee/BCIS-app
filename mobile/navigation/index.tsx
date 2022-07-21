@@ -91,7 +91,7 @@ function BottomTabNavigator() {
           title: "News",
           // Fix icon styling on large screens. React Navigation cuts off the icon since it's wide.
           // I fixed it by setting the width and then moving the icon closer to the text
-          tabBarIconStyle: { width: 30 },
+          tabBarIconStyle: { width: 30, marginRight: -10 },
           tabBarIcon: ({ color }) => (
             <FontAwesome name="newspaper-o" color={color} size={27} />
           ),

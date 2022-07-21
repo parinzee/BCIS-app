@@ -16,6 +16,7 @@ interface ActivityItemProps {
   dateUpdated: Date;
   videoURL: string | null;
   content: string;
+  width: number;
 }
 
 const monthNames = [
@@ -41,6 +42,7 @@ export default function ActivityItem({
   dateUpdated,
   content,
   videoURL,
+  width,
 }: ActivityItemProps) {
   const [imageEncoding, setImageEncoding] = React.useState<string | null>(null);
 
@@ -64,16 +66,16 @@ export default function ActivityItem({
         }
       }}
     >
-      <Surface style={styles.surface}>
+      <Surface style={{ ...styles.surface, width: width }}>
         <SkeletonContent
           isLoading={imageEncoding == null}
-          containerStyle={styles.thumbnail}
+          containerStyle={{ ...styles.thumbnail, width: width }}
         >
           <ImageBackground
             // Here we type cast, since SkeletonContent won't render the component if
             // isLoading is true
             source={{ uri: imageEncoding as string }}
-            style={styles.thumbnail}
+            style={{ ...styles.thumbnail, width: width }}
           >
             {videoURL != null ? (
               <FontAwesome name="play" size={50} color="red" />
@@ -93,7 +95,7 @@ export default function ActivityItem({
                     timeStyle: "short",
                   })}
                 </Caption>
-                <View style={{ width: 240 }}>
+                <View style={{ width: width - 90 }}>
                   <Markdown rules={MarkdownRenderRules} style={styles}>
                     {content}
                   </Markdown>
