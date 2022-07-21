@@ -6,9 +6,10 @@ interface layout {
     width: number;
   };
   isLargeDevice: boolean;
+  isNotSmallDevice: boolean;
 }
 
-export default function useLayout() {
+export default function useLayout(): layout {
   const { height, width } = useWindowDimensions();
 
   return {
@@ -17,6 +18,7 @@ export default function useLayout() {
       width,
     },
     isLargeDevice: width > 775,
+    isNotSmallDevice: width > 740,
   };
 }
 

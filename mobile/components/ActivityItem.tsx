@@ -16,7 +16,6 @@ interface ActivityItemProps {
   dateUpdated: Date;
   videoURL: string | null;
   content: string;
-  layout: layout;
 }
 
 const monthNames = [
@@ -42,7 +41,6 @@ export default function ActivityItem({
   dateUpdated,
   content,
   videoURL,
-  layout,
 }: ActivityItemProps) {
   const [imageEncoding, setImageEncoding] = React.useState<string | null>(null);
 
@@ -66,22 +64,16 @@ export default function ActivityItem({
         }
       }}
     >
-      <Surface
-        style={layout.isLargeDevice ? styles.surfaceLarge : styles.surface}
-      >
+      <Surface style={styles.surface}>
         <SkeletonContent
           isLoading={imageEncoding == null}
-          containerStyle={
-            layout.isLargeDevice ? styles.thumbnailLarge : styles.thumbnail
-          }
+          containerStyle={styles.thumbnail}
         >
           <ImageBackground
             // Here we type cast, since SkeletonContent won't render the component if
             // isLoading is true
             source={{ uri: imageEncoding as string }}
-            style={
-              layout.isLargeDevice ? styles.thumbnailLarge : styles.thumbnail
-            }
+            style={styles.thumbnail}
           >
             {videoURL != null ? (
               <FontAwesome name="play" size={50} color="red" />
@@ -101,9 +93,7 @@ export default function ActivityItem({
                     timeStyle: "short",
                   })}
                 </Caption>
-                <View
-                  style={layout.isLargeDevice ? { width: 340 } : { width: 240 }}
-                >
+                <View style={{ width: 240 }}>
                   <Markdown rules={MarkdownRenderRules} style={styles}>
                     {content}
                   </Markdown>
@@ -140,32 +130,13 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
-  thumbnailLarge: {
-    width: 450,
-    height: 240,
-    marginBottom: 5,
-    alignItems: "center",
-    justifyContent: "center",
-    overflow: "hidden",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-  },
   surface: {
     marginVertical: 20,
     borderRadius: 10,
     elevation: 8,
     height: 300,
     width: 350,
-    maxWidth: 700,
-    alignSelf: "center",
-    flexDirection: "column",
-  },
-  surfaceLarge: {
-    marginVertical: 20,
-    borderRadius: 10,
-    elevation: 8,
-    height: 400,
-    width: 450,
+    marginHorizontal: 10,
     maxWidth: 700,
     alignSelf: "center",
     flexDirection: "column",
