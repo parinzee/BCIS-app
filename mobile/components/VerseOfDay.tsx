@@ -10,7 +10,13 @@ interface VerseOfDayProps {
 
 export default function VerseOfDay({ layout }: VerseOfDayProps) {
   const { data: votd, isSuccess } = useGetVerseOfDayQuery();
-  const itemWidth = layout.isSmallDevice ? 315 : 350;
+  let itemWidth = 350;
+
+  if (layout.isSmallDevice) {
+    itemWidth = 315;
+  } else if (layout.isMediumDevice || layout.isLargeDevice) {
+    itemWidth = 720;
+  }
 
   let content = (
     <SkeletonContent isLoading={true} containerStyle={styles.container} />

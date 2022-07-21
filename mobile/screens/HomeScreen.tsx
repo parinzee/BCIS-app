@@ -16,7 +16,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<"Home">) {
       <View
         style={
           layout.isMediumDevice || layout.isLargeDevice
-            ? { marginHorizontal: 100 }
+            ? { width: 740, alignSelf: "center" }
             : null
         }
       >

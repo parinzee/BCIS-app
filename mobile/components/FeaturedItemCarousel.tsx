@@ -18,7 +18,7 @@ export default function FeaturedItemCarousel({
   let scrollingOffset = 150;
 
   if (layout.isMediumDevice || layout.isLargeDevice) {
-    scrollingOffset = 450;
+    scrollingOffset = 490;
   }
 
   let content = (
@@ -31,6 +31,8 @@ export default function FeaturedItemCarousel({
   if (isSuccess) {
     content = (
       <Carousel
+        // Force re-render when rotating screen
+        key={layout.window.height.toString() + layout.window.width.toString()}
         mode="parallax"
         snapEnabled={true}
         data={featured}
