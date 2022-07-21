@@ -18,7 +18,8 @@ web-build/
 *.pot
 *.pyc
 __pycache__
-db.sqlite3
+*.sqlite3
+*.sqlite
 media
 
 # Backup files # 
@@ -142,3 +143,4 @@ Control.ca-list
 Control.ca-bundle 
 Control.system-ca-bundle 
 GitHub.sublime-settings 
+backend/file::memory:?cache=shared
