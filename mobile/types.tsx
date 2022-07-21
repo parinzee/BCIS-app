@@ -72,3 +72,11 @@ export interface Featured {
   bg_color1: string;
   bg_color2: string;
 }
+
+export interface Votd {
+  votd: {
+    content: string;
+    display_ref: string;
+  };
+  bg_URL: string;
+}

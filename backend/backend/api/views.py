@@ -11,6 +11,8 @@ from .serializers import (
 )
 from .models import Featured, News, Team_Score, Activity
 
+import requests_cache
+
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
@@ -82,3 +84,20 @@ def team_scores(request):
             selected_dict["yellow"] += score.score
 
     return Response({"hs_scores": hs_scores, "elem_scores": elem_scores})
+
+
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny,))
+def verse_of_day(request):
+    # Expires in half a day
+    session = requests_cache.CachedSession("verse", use_memory=True, expire_after=43200)
+
+    votd = session.get(
+        "https://www.biblegateway.com/votd/get/?format=json&version=NIV"
+    ).json()["votd"]
+
+    bg_URL = session.get("https://source.unsplash.com/random/?nature").url
+
+    session.close()
+
+    return Response({"votd": votd, "bg_URL": bg_URL})

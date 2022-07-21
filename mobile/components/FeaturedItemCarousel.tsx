@@ -2,19 +2,18 @@ import SkeletonContent from "@03balogun/react-native-skeleton-content";
 import * as React from "react";
 import { Alert } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
-import useLayout from "../hooks/useLayout";
+import { layout } from "../hooks/useLayout";
 import { useGetFeaturedQuery } from "../slices/apiSlice";
 import FeaturedItem from "./FeaturedItem";
 
-export default function FeaturedItemCarousel() {
-  const layout = useLayout();
-  const {
-    data: featured,
-    isLoading,
-    isSuccess,
-    isError,
-    isFetching,
-  } = useGetFeaturedQuery();
+interface FeaturedItemCarouselProps {
+  layout: layout;
+}
+
+export default function FeaturedItemCarousel({
+  layout,
+}: FeaturedItemCarouselProps) {
+  const { data: featured, isSuccess, isError } = useGetFeaturedQuery();
 
   let content = (
     <SkeletonContent
@@ -31,7 +30,8 @@ export default function FeaturedItemCarousel() {
         data={featured}
         width={layout.window.width}
         modeConfig={{
-          parallaxScrollingOffset: 150,
+          parallaxScrollingOffset:
+            layout.isMediumDevice || layout.isLargeDevice ? 600 : 150,
           parallaxScrollingScale: 0.8,
         }}
         autoPlay={true}
