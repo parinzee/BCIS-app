@@ -10,6 +10,7 @@ exports[`renders correctly 1`] = `
       "borderRadius": 10,
       "elevation": 8,
       "height": 150,
+      "marginHorizontal": 10,
       "marginVertical": 20,
       "maxWidth": 700,
       "paddingHorizontal": 15,
@@ -114,17 +115,12 @@ exports[`renders correctly 1`] = `
         "flex": 1,
         "flexDirection": "column",
         "justifyContent": "space-between",
+        "overflow": "hidden",
       }
     }
   >
     <View
-      style={
-        Object {
-          "flex": 1,
-          "flexDirection": "column",
-          "justifyContent": "space-between",
-        }
-      }
+      style={Object {}}
     >
       <View
         style={
@@ -133,8 +129,8 @@ exports[`renders correctly 1`] = `
             "flexDirection": "row",
             "flexWrap": "wrap",
             "justifyContent": "flex-start",
-            "marginBottom": 10,
-            "marginTop": 10,
+            "marginBottom": 0,
+            "marginTop": 0,
             "width": "100%",
           }
         }
@@ -631,7 +627,6 @@ exports[`renders correctly 1`] = `
                       },
                       Array [
                         Object {
-                          "color": "#4286f4",
                           "textDecorationLine": "underline",
                         },
                         Object {},
@@ -715,7 +710,6 @@ exports[`renders correctly 1`] = `
                 "marginVertical": 2,
               },
               Object {
-                "flex": 0,
                 "textAlign": "right",
               },
             ],
@@ -725,7 +719,7 @@ exports[`renders correctly 1`] = `
     >
       Posted
        
-      17/6/2022
+      Jul 17, 2022, 10:22 PM
     </Text>
   </View>
 </View>
