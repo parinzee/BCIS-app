@@ -21,7 +21,15 @@ export default function TopNews({ layout }: TopNewsProps) {
         height: 150,
         borderRadius: 10,
         marginVertical: 20,
+        alignSelf: "center",
       }}
+      layout={[
+        {
+          width: itemWidth,
+          height: 150,
+          borderRadius: 10,
+        },
+      ]}
     />
   );
 

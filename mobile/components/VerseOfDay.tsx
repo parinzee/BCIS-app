@@ -19,7 +19,11 @@ export default function VerseOfDay({ layout }: VerseOfDayProps) {
   }
 
   let content = (
-    <SkeletonContent isLoading={true} containerStyle={styles.container} />
+    <SkeletonContent
+      isLoading={true}
+      containerStyle={{ ...styles.container, marginBottom: 20 }}
+      layout={[{ ...styles.container, width: itemWidth }]}
+    />
   );
 
   if (isSuccess) {

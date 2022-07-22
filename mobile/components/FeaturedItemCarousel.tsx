@@ -24,7 +24,15 @@ export default function FeaturedItemCarousel({
   let content = (
     <SkeletonContent
       isLoading={true}
-      containerStyle={{ width: 300, height: 120 }}
+      containerStyle={{
+        width: 300,
+        height: 120,
+        alignSelf: "center",
+        marginTop: 10,
+      }}
+      layout={[
+        { width: 300, height: 120, borderRadius: 10, alignSelf: "center" },
+      ]}
     />
   );
 
