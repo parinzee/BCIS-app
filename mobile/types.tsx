@@ -54,16 +54,31 @@ export interface News {
   department: "K" | "E" | "H" | null;
 }
 
-export interface Activity {
-  url: string;
-  title: string;
-  emoji: string;
-  content: string;
-  date_updated: string;
-  activity_date: string;
-  thumbnail_URL: string;
-  video_URL: string | null;
-}
+// Either thumbnail file or thumbnail url is specified
+// Read models.py in backend for more info
+export type Activity =
+  | {
+      url: string;
+      title: string;
+      emoji: string;
+      content: string;
+      date_updated: string;
+      activity_date: string;
+      thumbnail_URL: string;
+      thumbnail_File: null;
+      video_URL: string | null;
+    }
+  | {
+      url: string;
+      title: string;
+      emoji: string;
+      content: string;
+      date_updated: string;
+      activity_date: string;
+      thumbnail_URL: null;
+      thumbnail_File: string;
+      video_URL: string | null;
+    };
 
 export interface Portfolio {
   url: string;

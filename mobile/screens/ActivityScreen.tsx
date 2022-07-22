@@ -51,7 +51,11 @@ export default function ActivityScreen() {
             content={item.content}
             dateUpdated={new Date(item.date_updated)}
             activityDate={new Date(item.activity_date)}
-            thumbnailURL={item.thumbnail_URL}
+            thumbnailURL={
+              item.thumbnail_URL == null
+                ? item.thumbnail_File
+                : item.thumbnail_URL
+            }
             videoURL={item.video_URL}
             width={itemWidth}
           />

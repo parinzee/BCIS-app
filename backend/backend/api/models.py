@@ -1,6 +1,7 @@
 from django.db import models
 from colorfield.fields import ColorField
-from django.contrib.auth.models import User
+from django.forms import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 
 DEPARTMENT = (
@@ -46,11 +47,28 @@ class Activity(models.Model):
     content = models.TextField("content", max_length=300)
     date_updated = models.DateTimeField("date updated")
     activity_date = models.DateTimeField("date of activity")
-    thumbnail_URL = models.URLField("thumbnail url")
+
+    # Thumbnail can either be a url to external image
+    thumbnail_URL = models.URLField("thumbnail url", blank=True, null=True)
+
+    # or uploaded, but not both.
+    thumbnail_File = models.FileField("thumbnail file", blank=True, null=True)
     video_URL = models.URLField("video url", blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.title} - {self.date_updated}"
+
+    def clean(self) -> None:
+        if self.thumbnail_URL != None and self.thumbnail_File != None:
+            raise ValidationError(
+                _(
+                    "Thumbnail URL and Thumbnail File may not be filled at the same time."
+                )
+            )
+        elif self.thumbnail_URL == None and self.thumbnail_File == None:
+            raise ValidationError(
+                _("Either Thumbnail URL or Thumbnail File must be specified")
+            )
 
 
 class Portfolio(models.Model):
@@ -82,7 +100,7 @@ class PushID(models.Model):
 
 
 class Student(models.Model):
-    name = models.CharField("name", max_length=30)
+    name = models.CharField("name", max_length=50)
     department = models.CharField("department", choices=DEPARTMENT, max_length=2)
     team_color = models.CharField(
         "team color", choices=TEAM_COLORS, max_length=1, blank=True, null=True
@@ -93,7 +111,7 @@ class Student(models.Model):
 
 
 class Staff(models.Model):
-    name = models.CharField("name", max_length=30)
+    name = models.CharField("name", max_length=50)
     team_color = models.CharField(
         "team color", choices=TEAM_COLORS, max_length=1, blank=True, null=True
     )
@@ -103,7 +121,7 @@ class Staff(models.Model):
 
 
 class Parent(models.Model):
-    name = models.CharField("name", max_length=30)
+    name = models.CharField("name", max_length=50)
 
     def __str__(self) -> str:
         return f"{self.user}"
