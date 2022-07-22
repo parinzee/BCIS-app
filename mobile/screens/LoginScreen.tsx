@@ -15,10 +15,7 @@ import {
 } from "react-native-paper";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "react-native-paper";
-import {
-  handleCogntioLogin,
-  handleCogntioRegister,
-} from "../constants/AWSCognito";
+import { handleCogntioLogin, handleCogntioRegister } from "../utils/AWSCognito";
 import { useHeaderHeight } from "@react-navigation/elements";
 import FastImage from "react-native-fast-image";
 
