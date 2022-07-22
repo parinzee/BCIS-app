@@ -1,5 +1,6 @@
 import SkeletonContent from "@03balogun/react-native-skeleton-content";
-import { ImageBackground, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import FastImage from "react-native-fast-image";
 import { Surface } from "react-native-paper";
 import { layout } from "../hooks/useLayout";
 import { useGetVerseOfDayQuery } from "../slices/apiSlice";
@@ -31,7 +32,7 @@ export default function VerseOfDay({ layout }: VerseOfDayProps) {
       <Surface
         style={{ ...styles.container, width: itemWidth, marginBottom: 20 }}
       >
-        <ImageBackground
+        <FastImage
           source={{ uri: votd.bg_URL }}
           style={{ ...styles.container, overflow: "hidden", width: itemWidth }}
         >
@@ -59,7 +60,7 @@ export default function VerseOfDay({ layout }: VerseOfDayProps) {
               {votd.votd.display_ref}
             </Text>
           </View>
-        </ImageBackground>
+        </FastImage>
       </Surface>
     );
   }

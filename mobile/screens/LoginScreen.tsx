@@ -2,7 +2,6 @@ import {
   KeyboardAvoidingView,
   StyleSheet,
   View,
-  Image,
   StatusBar,
 } from "react-native";
 import * as React from "react";
@@ -12,7 +11,6 @@ import {
   HelperText,
   Subheading,
   TextInput,
-  Title,
   Text,
 } from "react-native-paper";
 import { useForm, Controller } from "react-hook-form";
@@ -22,6 +20,7 @@ import {
   handleCogntioRegister,
 } from "../constants/AWSCognito";
 import { useHeaderHeight } from "@react-navigation/elements";
+import FastImage from "react-native-fast-image";
 
 export default function LoginScreen() {
   const headerHeight = useHeaderHeight();
@@ -46,7 +45,7 @@ export default function LoginScreen() {
           : headerHeight + StatusBar.currentHeight
       }
     >
-      <Image
+      <FastImage
         source={require("../assets/images/bcis_logo.png")}
         style={styles.logo}
       />

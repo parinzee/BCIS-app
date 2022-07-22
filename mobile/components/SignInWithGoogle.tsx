@@ -1,9 +1,10 @@
 import * as React from "react";
 import * as Linking from "expo-linking";
-import { StyleSheet, Image, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { URLConfiguration } from "../constants/AWSCognito";
 import { handleGoogleCognitoCallback } from "../constants/AWSCognito";
+import FastImage from "react-native-fast-image";
 
 export default function SignInWithGoogle() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -27,7 +28,7 @@ export default function SignInWithGoogle() {
         onPress={() => Linking.openURL(URLConfiguration.googleURL)}
         disabled={isLoading}
       >
-        <Image
+        <FastImage
           source={require("../assets/images/g-normal.png")}
           style={styles.logo}
         />

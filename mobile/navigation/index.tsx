@@ -12,7 +12,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
-import { Image } from "react-native";
 
 import useLayout from "../hooks/useLayout";
 
@@ -25,6 +24,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { Theme } from "../types";
+import FastImage from "react-native-fast-image";
 
 export default function Navigation({ theme }: { theme: Theme }) {
   return (
@@ -113,7 +113,7 @@ function BottomTabNavigator() {
         options={{
           title: "Profile",
           tabBarIcon: ({ color }) => (
-            <Image
+            <FastImage
               source={require("../assets/images/placeholder-profile.jpeg")}
               style={{
                 width: 30,

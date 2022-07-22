@@ -1,4 +1,4 @@
-import { StyleSheet, View, ImageBackground, Pressable } from "react-native";
+import { StyleSheet, View, Pressable } from "react-native";
 import { Caption, Surface, Title } from "react-native-paper";
 import Markdown from "react-native-markdown-display";
 import MarkdownRenderRules from "../constants/MarkdownRenderRules";
@@ -6,7 +6,7 @@ import * as React from "react";
 import SkeletonContent from "@03balogun/react-native-skeleton-content";
 import { FontAwesome } from "@expo/vector-icons";
 import * as Linking from "expo-linking";
-import { layout } from "../hooks/useLayout";
+import FastImage from "react-native-fast-image";
 
 interface ActivityItemProps {
   thumbnailURL: string;
@@ -71,7 +71,7 @@ export default function ActivityItem({
           isLoading={imageEncoding == null}
           containerStyle={{ ...styles.thumbnail, width: width }}
         >
-          <ImageBackground
+          <FastImage
             // Here we type cast, since SkeletonContent won't render the component if
             // isLoading is true
             source={{ uri: imageEncoding as string }}
@@ -92,7 +92,7 @@ export default function ActivityItem({
                 <FontAwesome name="play" size={40} color="red" />
               </View>
             ) : null}
-          </ImageBackground>
+          </FastImage>
         </SkeletonContent>
         <View style={styles.innerContainer}>
           <View style={styles.body}>
