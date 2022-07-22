@@ -12,6 +12,7 @@ from .serializers import (
 )
 from .models import Featured, News, Portfolio, PushID, Team_Score, Activity
 
+import html
 import requests_cache
 
 
@@ -108,7 +109,16 @@ def verse_of_day(request):
 
     session.close()
 
-    return Response({"votd": votd, "bg_URL": bg_URL})
+    return Response(
+        {
+            "votd": {
+                # Biblegateway returns an escaped html string so we have to unescape it
+                "content": html.unescape(votd["content"]),
+                "display_ref": votd["display_ref"],
+            },
+            "bg_URL": bg_URL,
+        }
+    )
 
 
 class PushIDViewSet(
