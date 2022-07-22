@@ -19,6 +19,7 @@ import LoginScreen from "../screens/LoginScreen";
 import ModalScreen from "../screens/ModalScreen";
 import HomeScreen from "../screens/HomeScreen";
 import NewsScreen from "../screens/NewsScreen";
+import PortfolioScreen from "../screens/PortfolioScreen";
 import ActivityScreen from "../screens/ActivityScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { RootStackParamList, RootTabParamList } from "../types";
@@ -91,9 +92,22 @@ function BottomTabNavigator() {
           title: "News",
           // Fix icon styling on large screens. React Navigation cuts off the icon since it's wide.
           // I fixed it by setting the width and then moving the icon closer to the text
-          tabBarIconStyle: { width: 30, marginRight: -10 },
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="newspaper-o" color={color} size={27} />
+            <FontAwesome name="newspaper-o" color={color} size={28} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Portfolio"
+        component={PortfolioScreen}
+        options={{
+          title: "Student Portoflio & Certificates",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="certificate"
+              color={color}
+              size={30}
+            />
           ),
         }}
       />

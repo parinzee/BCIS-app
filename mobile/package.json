@@ -47,6 +47,7 @@
     "react-native": "0.68.2",
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "~2.2.1",
+    "react-native-image-modal": "^2.0.4",
     "react-native-markdown-display": "github:parinzee/react-native-markdown-display",
     "react-native-paper": "^4.12.2",
     "react-native-reanimated": "~2.8.0",
