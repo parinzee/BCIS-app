@@ -117,6 +117,15 @@ PODS:
   - glog (0.3.5)
   - hermes-engine (0.11.0)
   - libevent (2.1.12)
+  - libwebp (1.2.1):
+    - libwebp/demux (= 1.2.1)
+    - libwebp/mux (= 1.2.1)
+    - libwebp/webp (= 1.2.1)
+  - libwebp/demux (1.2.1):
+    - libwebp/webp
+  - libwebp/mux (1.2.1):
+    - libwebp/demux
+  - libwebp/webp (1.2.1)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -416,6 +425,10 @@ PODS:
     - React-Core
   - RNCAsyncStorage (1.17.7):
     - React-Core
+  - RNFastImage (8.5.11):
+    - React-Core
+    - SDWebImage (~> 5.11.1)
+    - SDWebImageWebPCoder (~> 0.8.4)
   - RNGestureHandler (2.2.1):
     - React-Core
   - RNReanimated (2.8.0):
@@ -448,6 +461,12 @@ PODS:
   - RNScreens (3.11.1):
     - React-Core
     - React-RCTImage
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
+  - SDWebImageWebPCoder (0.8.5):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.10)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -509,6 +528,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNAWSCognito (from `../node_modules/amazon-cognito-identity-js`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - RNFastImage (from `../node_modules/react-native-fast-image`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -519,6 +539,9 @@ SPEC REPOS:
     - fmt
     - hermes-engine
     - libevent
+    - libwebp
+    - SDWebImage
+    - SDWebImageWebPCoder
 
 EXTERNAL SOURCES:
   boost:
@@ -629,6 +652,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/amazon-cognito-identity-js"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNFastImage:
+    :path: "../node_modules/react-native-fast-image"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNReanimated:
@@ -667,6 +692,7 @@ SPEC CHECKSUMS:
   glog: 476ee3e89abb49e07f822b48323c51c57124b572
   hermes-engine: 84e3af1ea01dd7351ac5d8689cbbea1f9903ffc3
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
+  libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
   RCTRequired: 3e917ea5377751094f38145fdece525aa90545a0
   RCTTypeSafety: c43c072a4bd60feb49a9570b0517892b4305c45e
@@ -696,9 +722,12 @@ SPEC CHECKSUMS:
   ReactCommon: 095366164a276d91ea704ce53cb03825c487a3f2
   RNAWSCognito: 590dbcb259ec5a593b80f4d56624d386dd7b34ee
   RNCAsyncStorage: d81ee5c3db1060afd49ea7045ad460eff82d2b7d
+  RNFastImage: 1f2cab428712a4baaf78d6169eaec7f622556dd7
   RNGestureHandler: 1dc1ea9d4b64f999042afafbaccf5b143f0b2fa2
   RNReanimated: 64573e25e078ae6bec03b891586d50b9ec284393
   RNScreens: 4d83613b50b74ed277026375dc0810893b0c347f
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SDWebImageWebPCoder: 908b83b6adda48effe7667cd2b7f78c897e5111d
   Yoga: 99652481fcd320aefa4a7ef90095b95acd181952
 
 PODFILE CHECKSUM: 75da180da3d00c61c5c5d4d6e9e9822683f57808

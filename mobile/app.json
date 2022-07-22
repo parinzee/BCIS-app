@@ -5,14 +5,14 @@
     "owner": "parinzee",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/app-icon.png",
     "scheme": "bcis",
     "userInterfaceStyle": "automatic",
     "jsEngine": "hermes",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f5f9ff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
