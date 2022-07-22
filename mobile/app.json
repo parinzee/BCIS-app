@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "BCIS",
-    "slug": "bcis-app",
+    "name": "BCIS SC App",
+    "slug": "bcis-sc-app",
     "owner": "parinzee",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,7 +21,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.parinzee.bcis-sc-app"
     },
     "android": {
       "adaptiveIcon": {
