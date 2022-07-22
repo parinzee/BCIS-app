@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import viewsets, permissions, mixins
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .serializers import (
@@ -9,8 +8,9 @@ from .serializers import (
     UserSerializer,
     NewsSerializer,
     ActivitySerializer,
+    PushIDSerializer,
 )
-from .models import Featured, News, Portfolio, Team_Score, Activity
+from .models import Featured, News, Portfolio, PushID, Team_Score, Activity
 
 import requests_cache
 
@@ -109,3 +109,11 @@ def verse_of_day(request):
     session.close()
 
     return Response({"votd": votd, "bg_URL": bg_URL})
+
+
+class PushIDViewSet(
+    mixins.CreateModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet
+):
+    queryset = PushID.objects.all()
+    serializer_class = PushIDSerializer
+    permission_classes = [permissions.AllowAny]

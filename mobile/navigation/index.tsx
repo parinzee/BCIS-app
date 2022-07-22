@@ -91,9 +91,8 @@ function BottomTabNavigator() {
         options={{
           title: "News",
           // Fix icon styling on large screens. React Navigation cuts off the icon since it's wide.
-          // I fixed it by setting the width and then moving the icon closer to the text
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="newspaper-o" color={color} size={28} />
+            <FontAwesome name="newspaper-o" color={color} size={22.5} />
           ),
         }}
       />
@@ -102,11 +101,13 @@ function BottomTabNavigator() {
         component={PortfolioScreen}
         options={{
           title: "Student Portoflio & Certificates",
+          tabBarLabel: "Portfolios",
+          // Fix icon styling on large screens. React Navigation cuts off the icon since it's wide.
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="certificate"
               color={color}
-              size={30}
+              size={27}
             />
           ),
         }}

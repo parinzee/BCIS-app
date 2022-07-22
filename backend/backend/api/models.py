@@ -76,14 +76,13 @@ class Featured(models.Model):
 
 class PushID(models.Model):
     push_id = models.CharField("exponent push id", max_length=100)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f"{self.user} - {self.push_id}"
 
 
 class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField("name", max_length=30)
     department = models.CharField("department", choices=DEPARTMENT, max_length=2)
     team_color = models.CharField(
         "team color", choices=TEAM_COLORS, max_length=1, blank=True, null=True
@@ -94,7 +93,7 @@ class Student(models.Model):
 
 
 class Staff(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField("name", max_length=30)
     team_color = models.CharField(
         "team color", choices=TEAM_COLORS, max_length=1, blank=True, null=True
     )
@@ -104,7 +103,7 @@ class Staff(models.Model):
 
 
 class Parent(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField("name", max_length=30)
 
     def __str__(self) -> str:
         return f"{self.user}"

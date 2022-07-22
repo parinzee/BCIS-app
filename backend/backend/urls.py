@@ -24,6 +24,7 @@ router.register(r"news", views.NewsViewSet)
 router.register(r"activities", views.ActivityViewSet)
 router.register(r"featured", views.FeaturedViewSet)
 router.register(r"portfolio", views.PortfolioViewSet)
+router.register(r"push-id", views.PushIDViewSet)
 
 
 urlpatterns = [

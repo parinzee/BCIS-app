@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Featured, News, Team_Score, Activity, Portfolio
+from .models import Featured, News, PushID, Team_Score, Activity, Portfolio
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -36,4 +36,10 @@ class FeaturedSerializer(serializers.HyperlinkedModelSerializer):
 class Team_ScoreSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Team_Score
+        fields = "__all__"
+
+
+class PushIDSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = PushID
         fields = "__all__"
