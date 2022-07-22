@@ -25,13 +25,14 @@ Notifications.setNotificationHandler({
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const theme = useTheme();
-  if (!isLoadingComplete) {
-    return null;
-  }
 
   React.useEffect(() => {
     registerForPushNotificationsAsync();
   }, []);
+
+  if (!isLoadingComplete) {
+    return null;
+  }
 
   return (
     <SafeAreaProvider>

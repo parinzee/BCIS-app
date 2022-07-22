@@ -96,7 +96,7 @@ class PushID(models.Model):
     push_id = models.CharField("exponent push id", max_length=100)
 
     def __str__(self) -> str:
-        return f"{self.user} - {self.push_id}"
+        return f"{self.push_id}"
 
 
 class Student(models.Model):

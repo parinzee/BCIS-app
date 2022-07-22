@@ -44,7 +44,11 @@ export default function TopActivity({ layout }: TopNewsProps) {
             content={activities[0].content}
             dateUpdated={new Date(activities[0].date_updated)}
             activityDate={new Date(activities[0].activity_date)}
-            thumbnailURL={activities[0].thumbnail_URL}
+            thumbnailURL={
+              activities[0].thumbnail_URL != null
+                ? activities[0].thumbnail_URL
+                : activities[0].thumbnail_File
+            }
             videoURL={activities[0].video_URL}
             width={itemWidth}
           />
@@ -55,7 +59,11 @@ export default function TopActivity({ layout }: TopNewsProps) {
             content={activities[1].content}
             dateUpdated={new Date(activities[1].date_updated)}
             activityDate={new Date(activities[1].activity_date)}
-            thumbnailURL={activities[1].thumbnail_URL}
+            thumbnailURL={
+              activities[1].thumbnail_URL != null
+                ? activities[1].thumbnail_URL
+                : activities[1].thumbnail_File
+            }
             videoURL={activities[1].video_URL}
             width={itemWidth}
           />
@@ -70,7 +78,11 @@ export default function TopActivity({ layout }: TopNewsProps) {
           content={activities[0].content}
           dateUpdated={new Date(activities[0].date_updated)}
           activityDate={new Date(activities[0].activity_date)}
-          thumbnailURL={activities[0].thumbnail_URL}
+          thumbnailURL={
+            activities[0].thumbnail_URL != null
+              ? activities[0].thumbnail_URL
+              : activities[0].thumbnail_File
+          }
           videoURL={activities[0].video_URL}
           width={itemWidth}
         />

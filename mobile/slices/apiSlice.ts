@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { News, Activity, Featured, Votd, Portfolio } from "../types";
+import { serverURL } from "../constants/API";
 
 export const apiSlice = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000" }),
+  baseQuery: fetchBaseQuery({ baseUrl: serverURL }),
   refetchOnReconnect: true,
   endpoints: (builder) => ({
     getNews: builder.query<News[], void>({
