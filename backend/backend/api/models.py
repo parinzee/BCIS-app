@@ -30,7 +30,7 @@ class Team_Score(models.Model):
 class News(models.Model):
     title = models.CharField("title", max_length=50)
     emoji = models.CharField("title emoji", max_length=20)
-    content = models.TextField("content", max_length=150)
+    content = models.TextField("content", max_length=300)
     date_updated = models.DateTimeField("date updated")
     department = models.CharField(
         "department", choices=DEPARTMENT, max_length=2, blank=True, null=True
@@ -43,11 +43,21 @@ class News(models.Model):
 class Activity(models.Model):
     title = models.CharField("title", max_length=50)
     emoji = models.CharField("title emoji", max_length=20)
-    content = models.TextField("content", max_length=83)
+    content = models.TextField("content", max_length=300)
     date_updated = models.DateTimeField("date updated")
     activity_date = models.DateTimeField("date of activity")
     thumbnail_URL = models.URLField("thumbnail url")
     video_URL = models.URLField("video url", blank=True, null=True)
+
+    def __str__(self) -> str:
+        return f"{self.title} - {self.date_updated}"
+
+
+class Portfolio(models.Model):
+    title = models.CharField("title", max_length=60)
+    content = models.TextField("conent", max_length=200)
+    date_updated = models.DateTimeField("thumbnail_url")
+    image_URL = models.FileField("photo")
 
     def __str__(self) -> str:
         return f"{self.title} - {self.date_updated}"

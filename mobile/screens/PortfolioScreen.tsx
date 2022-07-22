@@ -1,18 +1,69 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, FlatList, RefreshControl } from "react-native";
 import PortfolioItem from "../components/PortfolioItem";
+import useLayout from "../hooks/useLayout";
+import { ActivityIndicator, Colors, Title } from "react-native-paper";
+import { useGetPortfoliosQuery } from "../slices/apiSlice";
+import useTheme from "../hooks/useTheme";
 
 export default function PortfolioScreen() {
-  return (
-    <View style={styles.container}>
-      <PortfolioItem
-        title="Parin Received 1st Place at AI Builders"
-        content="Congratulations to **Parinthapat Pengpun** for receiving the first place award. More details about [that here](https://github.com/parinzee)!"
-        dateUpdated={new Date()}
-        width={350}
-        imageURL="https://scontent.fbkk13-3.fna.fbcdn.net/v/t39.30808-6/294644472_5203052613103738_1373095766086075602_n.jpg?stp=cp1_dst-jpg&_nc_cat=110&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeF27_OLE3oasOlFTpXevnSBthCT-xEB-r22EJP7EQH6vVCw-qH4EbApSb92NLQPpJI0KGYCQUGil4S5HndAESdP&_nc_ohc=WHwMLqUU7HgAX9qWMj_&_nc_ht=scontent.fbkk13-3.fna&oh=00_AT8PFObvNqQJWJJuSjsD-u7qV29Mv4Pp5ZhzPWyBM4m7QA&oe=62DE4EC7"
+  const layout = useLayout();
+  const itemImageBackground = useTheme().colors.backdrop;
+  const itemWidth = layout.isSmallDevice ? 315 : 350;
+
+  const {
+    data: portfolios,
+    isLoading,
+    isSuccess,
+    isError,
+    isFetching,
+    refetch,
+  } = useGetPortfoliosQuery();
+
+  let content;
+
+  if (isLoading) {
+    content = (
+      <ActivityIndicator
+        color={Colors.blue300}
+        size={layout.isLargeDevice ? 70 : 40}
       />
-    </View>
-  );
+    );
+  } else if (isSuccess) {
+    content = (
+      <FlatList
+        // Specify an arbitary key to force FlatList refresh
+        // when layout.isNotSmallDevice may change when rotating screens
+        key={layout.isMediumDevice || layout.isLargeDevice ? "@" : "!"}
+        data={portfolios}
+        numColumns={layout.isMediumDevice || layout.isLargeDevice ? 2 : 1}
+        refreshControl={
+          <RefreshControl
+            refreshing={isFetching}
+            tintColor={Colors.blue300}
+            colors={[Colors.blue300]}
+            // Add timeout to ease the pull-to-refresh
+            onRefresh={refetch}
+          />
+        }
+        renderItem={({ item }) => (
+          <PortfolioItem
+            title={item.title}
+            content={item.content}
+            dateUpdated={new Date(item.date_updated)}
+            imageURL={item.image_URL}
+            width={itemWidth}
+            imageBackground={itemImageBackground}
+          />
+        )}
+        style={{ width: layout.window.width }}
+        contentContainerStyle={{ alignItems: "center" }}
+      />
+    );
+  } else if (isError) {
+    content = <Title>Unable to get News</Title>;
+  }
+
+  return <View style={styles.container}>{content}</View>;
 }
 
 const styles = StyleSheet.create({

@@ -11,5 +11,6 @@ admin.site.register(
         models.Team_Score,
         models.Activity,
         models.Featured,
+        models.Portfolio,
     ]
 )

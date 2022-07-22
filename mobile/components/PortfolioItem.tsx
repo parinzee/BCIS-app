@@ -13,6 +13,7 @@ interface PortfolioItemProps {
   dateUpdated: Date;
   imageURL: string;
   width: number;
+  imageBackground: string;
 }
 
 export default function PortfolioItem({
@@ -21,6 +22,7 @@ export default function PortfolioItem({
   dateUpdated,
   width,
   imageURL,
+  imageBackground,
 }: PortfolioItemProps) {
   const [imageEncoding, setImageEncoding] = React.useState<string | null>(null);
 
@@ -61,9 +63,9 @@ export default function PortfolioItem({
       >
         <View style={{ ...styles.image, width: width }}>
           <ImageModal
-            resizeMode="cover"
+            resizeMode="contain"
             modalImageResizeMode="contain"
-            imageBackgroundColor="#000000"
+            imageBackgroundColor={imageBackground}
             isTranslucent={true}
             // Maintain 16:9 aspect ratio-ish
             style={{
@@ -88,6 +90,9 @@ const styles = StyleSheet.create({
     height: 400,
     borderRadius: 15,
     justifyContent: "space-between",
+    marginVertical: 20,
+    marginHorizontal: 10,
+    alignSelf: "center",
   },
   bodyContainer: {
     paddingTop: 10,

@@ -5,11 +5,12 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .serializers import (
     FeaturedSerializer,
+    PortfolioSerializer,
     UserSerializer,
     NewsSerializer,
     ActivitySerializer,
 )
-from .models import Featured, News, Team_Score, Activity
+from .models import Featured, News, Portfolio, Team_Score, Activity
 
 import requests_cache
 
@@ -41,6 +42,13 @@ class ActivityViewSet(viewsets.ReadOnlyModelViewSet):
 
     queryset = Activity.objects.all().order_by("date_updated").reverse()
     serializer_class = ActivitySerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class PortfolioViewSet(viewsets.ReadOnlyModelViewSet):
+
+    queryset = Portfolio.objects.all().order_by("date_updated").reverse()
+    serializer_class = PortfolioSerializer
     permission_classes = [permissions.AllowAny]
 
 

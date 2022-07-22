@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Featured, News, Team_Score, Activity
+from .models import Featured, News, Team_Score, Activity, Portfolio
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -18,6 +18,12 @@ class NewsSerializer(serializers.HyperlinkedModelSerializer):
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Activity
+        fields = "__all__"
+
+
+class PortfolioSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Portfolio
         fields = "__all__"
 
 

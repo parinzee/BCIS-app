@@ -65,6 +65,14 @@ export interface Activity {
   video_URL: string | null;
 }
 
+export interface Portfolio {
+  url: string;
+  title: string;
+  content: string;
+  date_updated: string;
+  image_URL: string;
+}
+
 export interface Featured {
   url: string;
   title: string;

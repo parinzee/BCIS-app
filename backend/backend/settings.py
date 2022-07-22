@@ -138,3 +138,8 @@ REST_FRAMEWORK = {
         "rest_framework.renderers.BrowsableAPIRenderer",
     ],
 }
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3StaticStorage"
+AWS_STORAGE_BUCKET_NAME = "bcis-app"
+AWS_QUERYSTRING_AUTH = False
