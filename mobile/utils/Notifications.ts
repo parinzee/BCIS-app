@@ -50,14 +50,43 @@ const registerForPushNotificationsAsync = async () => {
   }
 };
 
-const addNotificationListener = async () => {
-  const subscription = Notifications.addNotificationResponseReceivedListener(
-    (resp) => {
-      const url = resp.notification.request.content.url;
-      Linking.openURL(url);
-    }
-  );
-  return subscription;
+const getInitialURL = async () => {
+  // First, you may want to do the default deep link handling
+  // Check if app was opened from a deep link
+  let url = await Linking.getInitialURL();
+
+  if (url != null) {
+    return url;
+  }
+
+  // Handle URL from expo push notifications
+  const response = await Notifications.getLastNotificationResponseAsync();
+  url = response?.notification.request.content.data.url as string;
+
+  return url;
 };
 
-export { registerForPushNotificationsAsync };
+const subscribe = (listener: (url: string) => void) => {
+  const onReceiveURL = ({ url }: { url: string }) => listener(url);
+
+  // Listen to incoming links from deep linking
+  Linking.addEventListener("url", onReceiveURL);
+
+  // Listen to expo push notifications
+  const subscription = Notifications.addNotificationResponseReceivedListener(
+    (response) => {
+      const url = response.notification.request.content.data.url as string;
+
+      // Let React Navigation handle the URL
+      listener(url);
+    }
+  );
+
+  return () => {
+    // Clean up the event listeners
+    Linking.removeEventListener("url", onReceiveURL);
+    subscription.remove();
+  };
+};
+
+export { registerForPushNotificationsAsync, subscribe, getInitialURL };

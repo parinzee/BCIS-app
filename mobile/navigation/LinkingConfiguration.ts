@@ -8,6 +8,7 @@ import { LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 
 import { RootStackParamList } from "../types";
+import { getInitialURL, subscribe } from "../utils/Notifications";
 
 const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.createURL("/")],
@@ -26,6 +27,8 @@ const linking: LinkingOptions<RootStackParamList> = {
       Modal: "modal",
     },
   },
+  getInitialURL,
+  subscribe,
 };
 
 export default linking;
