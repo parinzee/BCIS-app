@@ -1,10 +1,17 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from sentry_sdk import capture_event, capture_exception
 
 from .models import News, Activity, Portfolio, PushID
 
 import json
 import requests
+
+
+class PushAPIException(Exception):
+    def __init__(self, pushapi_resp, *args) -> None:
+        self.pushapi_resp = pushapi_resp
+        super().__init__(*args)
 
 
 @receiver(post_save, sender=News)
@@ -28,7 +35,7 @@ def notify_users(sender, instance, **kwargs):
         push_ids = list(map(lambda x: x.push_id, list(PushID.objects.all())))
 
         payload = {
-            "to": push_ids,
+            "to": "asda",
             "title": title,
             "subtitle": f"New {sender.__name__}!",
             "body": instance.content,
@@ -43,3 +50,6 @@ def notify_users(sender, instance, **kwargs):
             headers=headers,
             json=payload,
         )
+
+        if resp.status_code != 200:
+            capture_exception(PushAPIException(resp.text))
