@@ -25,6 +25,7 @@ router.register(r"activities", views.ActivityViewSet)
 router.register(r"featured", views.FeaturedViewSet)
 router.register(r"portfolio", views.PortfolioViewSet)
 router.register(r"push-id", views.PushIDViewSet)
+router.register(r"gpa-score", views.GPAScoreViewset)
 
 
 urlpatterns = [

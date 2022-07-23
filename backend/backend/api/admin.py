@@ -10,5 +10,6 @@ admin.site.register(
         models.Activity,
         models.Featured,
         models.Portfolio,
+        models.GPAScore,
     ]
 )

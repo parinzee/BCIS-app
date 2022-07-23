@@ -1,45 +1,50 @@
-from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Featured, News, PushID, Team_Score, Activity, Portfolio
+from . import models
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class AppUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User
+        model = models.AppUser
         fields = "__all__"
 
 
 class NewsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = News
+        model = models.News
         fields = "__all__"
 
 
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Activity
+        model = models.Activity
         fields = "__all__"
 
 
 class PortfolioSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Portfolio
+        model = models.Portfolio
         fields = "__all__"
 
 
 class FeaturedSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Featured
+        model = models.Featured
         fields = "__all__"
 
 
 class Team_ScoreSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Team_Score
+        model = models.Team_Score
         fields = "__all__"
 
 
 class PushIDSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = PushID
+        model = models.PushID
+        fields = "__all__"
+
+
+class GPAScoreSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.GPAScore
         fields = "__all__"

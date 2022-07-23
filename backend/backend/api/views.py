@@ -4,13 +4,23 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .serializers import (
     FeaturedSerializer,
+    GPAScoreSerializer,
     PortfolioSerializer,
-    UserSerializer,
+    AppUserSerializer,
     NewsSerializer,
     ActivitySerializer,
     PushIDSerializer,
 )
-from .models import Featured, News, Portfolio, PushID, Team_Score, Activity
+from .models import (
+    AppUser,
+    Featured,
+    GPAScore,
+    News,
+    Portfolio,
+    PushID,
+    Team_Score,
+    Activity,
+)
 
 import html
 import requests_cache
@@ -21,9 +31,9 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
 
-    queryset = User.objects.all().order_by("-date_joined")
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAdminUser]
+    queryset = AppUser.objects.all()
+    serializer_class = AppUserSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):
@@ -126,4 +136,10 @@ class PushIDViewSet(
 ):
     queryset = PushID.objects.all()
     serializer_class = PushIDSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class GPAScoreViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = GPAScore.objects.all()
+    serializer_class = GPAScoreSerializer
     permission_classes = [permissions.AllowAny]
