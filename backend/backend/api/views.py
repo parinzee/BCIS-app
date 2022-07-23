@@ -112,7 +112,7 @@ def verse_of_day(request):
     return Response(
         {
             "votd": {
-                # Biblegateway returns an escaped html string so we have to unescape it
+                # Biblegateway returns an escaped html string so we have to unescape it (eg: change &amp; to &)
                 "content": html.unescape(votd["content"]),
                 "display_ref": votd["display_ref"],
             },

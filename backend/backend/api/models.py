@@ -17,6 +17,8 @@ TEAM_COLORS = (
     ("Y", "Yellow Team"),
 )
 
+APP_USERS = (("S", "Student"), ("P", "Parent"), ("T", "Teacher/Staff"))
+
 
 class Team_Score(models.Model):
     score = models.BigIntegerField("score")
@@ -99,29 +101,22 @@ class PushID(models.Model):
         return f"{self.push_id}"
 
 
-class Student(models.Model):
+class AppUser(models.Model):
     name = models.CharField("name", max_length=50)
-    department = models.CharField("department", choices=DEPARTMENT, max_length=2)
+    email = models.EmailField("email")
+    user_type = models.CharField("user type", choices=APP_USERS, max_length=1)
+    department = models.CharField(
+        "department", choices=DEPARTMENT, max_length=2, blank=True, null=True
+    )
     team_color = models.CharField(
         "team color", choices=TEAM_COLORS, max_length=1, blank=True, null=True
     )
 
     def __str__(self) -> str:
-        return f"{self.user}"
+        return f"{self.name} - {self.email}"
 
 
-class Staff(models.Model):
-    name = models.CharField("name", max_length=50)
-    team_color = models.CharField(
-        "team color", choices=TEAM_COLORS, max_length=1, blank=True, null=True
-    )
-
-    def __str__(self) -> str:
-        return f"{self.user}"
-
-
-class Parent(models.Model):
-    name = models.CharField("name", max_length=50)
-
-    def __str__(self) -> str:
-        return f"{self.user}"
+class GPAScore(models.Model):
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
+    date_added = models.DateTimeField("date added")
+    gpa = models.DecimalField("cumulative gpa", max_digits=5, decimal_places=3)
