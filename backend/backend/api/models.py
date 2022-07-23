@@ -39,6 +39,8 @@ class News(models.Model):
         "department", choices=DEPARTMENT, max_length=2, blank=True, null=True
     )
 
+    notification = models.BooleanField("Send Notification to User")
+
     def __str__(self) -> str:
         return f"{self.title} - {self.date_updated}"
 
@@ -57,17 +59,19 @@ class Activity(models.Model):
     thumbnail_File = models.FileField("thumbnail file", blank=True, null=True)
     video_URL = models.URLField("video url", blank=True, null=True)
 
+    notification = models.BooleanField("Send Notification to User")
+
     def __str__(self) -> str:
         return f"{self.title} - {self.date_updated}"
 
     def clean(self) -> None:
-        if self.thumbnail_URL != None and self.thumbnail_File != None:
+        if self.thumbnail_URL is not None and self.thumbnail_File != "":
             raise ValidationError(
                 _(
                     "Thumbnail URL and Thumbnail File may not be filled at the same time."
                 )
             )
-        elif self.thumbnail_URL == None and self.thumbnail_File == None:
+        elif self.thumbnail_URL is None and self.thumbnail_File == "":
             raise ValidationError(
                 _("Either Thumbnail URL or Thumbnail File must be specified")
             )
@@ -78,6 +82,7 @@ class Portfolio(models.Model):
     content = models.TextField("conent", max_length=200)
     date_updated = models.DateTimeField("thumbnail_url")
     image_URL = models.FileField("photo")
+    notification = models.BooleanField("Send Notification to User")
 
     def __str__(self) -> str:
         return f"{self.title} - {self.date_updated}"

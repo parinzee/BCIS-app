@@ -19,7 +19,7 @@ const linking: LinkingOptions<RootStackParamList> = {
           Home: "home",
           News: "news",
           Portfolio: "portfolio",
-          Activities: "activities",
+          Activities: "activity",
           Profile: "profile",
         },
       },
