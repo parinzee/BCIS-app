@@ -19,13 +19,13 @@ from django.urls import path, include
 from rest_framework import routers
 
 router = routers.DefaultRouter()
-router.register(r"users", views.UserViewSet)
+router.register(r"users", views.AppUserViewSet, basename="appuser")
 router.register(r"news", views.NewsViewSet)
 router.register(r"activities", views.ActivityViewSet)
 router.register(r"featured", views.FeaturedViewSet)
 router.register(r"portfolio", views.PortfolioViewSet)
 router.register(r"push-id", views.PushIDViewSet)
-router.register(r"gpa-score", views.GPAScoreViewset)
+router.register(r"gpa-score", views.GPAScoreViewset, basename="gpascore")
 
 
 urlpatterns = [

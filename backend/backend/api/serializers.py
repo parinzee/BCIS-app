@@ -45,6 +45,8 @@ class PushIDSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class GPAScoreSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.SlugRelatedField("email", queryset=models.AppUser.objects.all())
+
     class Meta:
         model = models.GPAScore
         fields = "__all__"

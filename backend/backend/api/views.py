@@ -26,14 +26,14 @@ import html
 import requests_cache
 
 
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
+class AppUserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
 
     queryset = AppUser.objects.all()
     serializer_class = AppUserSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAdminUser]
 
 
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):
@@ -139,7 +139,12 @@ class PushIDViewSet(
     permission_classes = [permissions.AllowAny]
 
 
-class GPAScoreViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class GPAScoreViewset(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
     queryset = GPAScore.objects.all()
     serializer_class = GPAScoreSerializer
     permission_classes = [permissions.AllowAny]
