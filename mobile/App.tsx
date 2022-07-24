@@ -6,13 +6,15 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { Provider as PaperProvider } from "react-native-paper";
 import { Provider as ReduxProvider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { registerForPushNotificationsAsync } from "./utils/Notifications";
 import useCachedResources from "./hooks/useCachedResources";
 import Navigation from "./navigation";
 import useTheme from "./hooks/useTheme";
-import store from "./store";
+import store, { persistor } from "./store";
+import { View } from "react-native";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -40,10 +42,19 @@ export default function App() {
         style={{ flex: 1, backgroundColor: theme.colors.background }}
       >
         <ReduxProvider store={store}>
-          <PaperProvider theme={theme}>
-            <Navigation theme={theme} />
-            <StatusBar />
-          </PaperProvider>
+          <PersistGate
+            loading={
+              <View
+                style={{ flex: 1, backgroundColor: theme.colors.background }}
+              />
+            }
+            persistor={persistor}
+          >
+            <PaperProvider theme={theme}>
+              <Navigation theme={theme} />
+              <StatusBar />
+            </PaperProvider>
+          </PersistGate>
         </ReduxProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>

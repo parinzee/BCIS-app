@@ -25,8 +25,11 @@ import ProfileScreen from "../screens/ProfileScreen";
 import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { Theme } from "../types";
-import FastImage from "react-native-fast-image";
 import RegisterInfoScreen from "../screens/RegisterInfoScreen";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+import FastImage from "react-native-fast-image";
+import { Avatar } from "react-native-paper";
 
 export default function Navigation({ theme }: { theme: Theme }) {
   return (
@@ -75,6 +78,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const Layout = useLayout();
+  const user = useSelector((state: RootState) => state.user);
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
@@ -133,18 +137,38 @@ function BottomTabNavigator() {
         component={ProfileScreen}
         options={{
           title: "Profile",
-          tabBarIcon: ({ color }) => (
-            <FastImage
-              source={require("../assets/images/placeholder-profile.jpeg")}
-              style={{
-                width: 30,
-                height: 30,
-                borderRadius: 20,
-                borderColor: color,
-                borderWidth: 2,
-              }}
-            />
-          ),
+          tabBarIcon: ({ color }) => {
+            if (user.profileURL != null) {
+              return (
+                <FastImage
+                  source={{ uri: user.profileURL }}
+                  style={{
+                    width: 30,
+                    height: 30,
+                    borderRadius: 20,
+                    borderColor: color,
+                    borderWidth: 2,
+                  }}
+                />
+              );
+            } else if (user.name != null) {
+              return (
+                <Avatar.Text
+                  label={user.name[0]}
+                  size={30}
+                  style={{ backgroundColor: color }}
+                />
+              );
+            } else {
+              return (
+                <Avatar.Text
+                  label="G"
+                  size={30}
+                  style={{ backgroundColor: color }}
+                />
+              );
+            }
+          },
         }}
       />
     </BottomTab.Navigator>

@@ -29,9 +29,7 @@ const registerAPIUser = async (
       department,
       team_color,
     }),
-  })
-    .then((resp) => resp.json())
-    .then((resp) => console.log(resp));
+  });
 };
 
 const APIUserExists = async (email: string) => {
@@ -43,14 +41,17 @@ const APIUserExists = async (email: string) => {
 };
 
 const getAPIUser = async (email: string, accessToken: string) => {
-  const result = await fetch(`${serverURL}/users/email?email=${email}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Token ${accessToken}`,
-    },
-  }).then((resp) => resp.json());
+  const result = await fetch(
+    `${serverURL}/users/email/?email=${encodeURIComponent(email)}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${accessToken}`,
+      },
+    }
+  );
 
-  return result as APIUser;
+  return (await result.json()) as APIUser;
 };
 
 export { serverURL, registerAPIUser, APIUserExists, getAPIUser };

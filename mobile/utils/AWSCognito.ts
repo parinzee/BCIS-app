@@ -89,9 +89,7 @@ const getUserAttributes = async (access_token: string) => {
       "X-Amz-Target": "AWSCognitoIdentityProviderService.GetUser",
     },
     body: JSON.stringify({ AccessToken: access_token }),
-  })
-    .then((resp) => resp.json())
-    .catch((err) => console.log(err));
+  }).then((resp) => resp.json());
 
   data["UserAttributes"].forEach((element: { [key: string]: string }) => {
     attr[element["Name"]] = element["Value"];
@@ -106,15 +104,12 @@ const handleGoogleCognitoCallback = async (event: Linking.EventType) => {
 };
 
 const handleCogntioRegister = async (email: string, password: string) => {
-  userPool.signUp(email, password, [], [], (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(result);
-    }
-  });
+  await userPool.signUp(email, password, [], [], (err, result) => {});
 
-  await handleCogntioLogin(email, password);
+  // Artificial delay for Cogntio to process user
+  setTimeout(() => {
+    handleCogntioLogin(email, password);
+  }, 1500);
 };
 
 const handleCogntioLogin = async (email: string, password: string) => {
@@ -141,7 +136,7 @@ const handleCogntioLogin = async (email: string, password: string) => {
         SecureStore.setItemAsync("last_refresh", new Date().toISOString()),
       ]);
     },
-    onFailure: () => {
+    onFailure: (err) => {
       Alert.alert(
         "Login Failed",
         "Please check email/password and internet connection"
@@ -176,6 +171,15 @@ const getTokens = async () => {
   return { idToken, accessToken };
 };
 
+const clearAuthTokens = async () => {
+  await Promise.all([
+    SecureStore.deleteItemAsync("id_token"),
+    SecureStore.deleteItemAsync("access_token"),
+    SecureStore.deleteItemAsync("refresh_token"),
+    SecureStore.deleteItemAsync("last_refresh"),
+  ]);
+};
+
 export {
   URLConfiguration,
   handleGoogleCognitoCallback,
@@ -184,4 +188,5 @@ export {
   refreshTokens,
   getUserAttributes,
   getTokens,
+  clearAuthTokens,
 };

@@ -10,7 +10,6 @@ import {
 import { handleGoogleCognitoCallback } from "../utils/AWSCognito";
 import FastImage from "react-native-fast-image";
 import { APIUserExists, getAPIUser } from "../utils/API";
-import * as SecureStore from "expo-secure-store";
 import { useDispatch } from "react-redux";
 import { login } from "../slices/userSlice";
 import { useNavigation } from "@react-navigation/native";
@@ -32,6 +31,8 @@ export default function SignInWithGoogle() {
           navigation.navigate("RegisterInfo");
         } else {
           const APIUser = await getAPIUser(email as string, accessToken);
+          console.log(accessToken);
+          console.log(APIUser);
           dispatch(
             login({
               name: APIUser.name,

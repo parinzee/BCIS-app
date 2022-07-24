@@ -36,6 +36,7 @@ export default function LoginScreen({
 }: RootStackScreenProps<"Login">) {
   const headerHeight = useHeaderHeight();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = React.useState(false);
   const {
     control,
     handleSubmit,
@@ -119,12 +120,15 @@ export default function LoginScreen({
         </HelperText>
         <View style={styles.buttonContainer}>
           <Button
+            loading={isLoading}
             mode="contained"
             onPress={handleSubmit(async (data) => {
+              setIsLoading(true);
               handleCogntioLogin(data.email, data.password).then(async () => {
                 const userExists = await APIUserExists(data.email);
                 if (!userExists) {
                   navigation.navigate("RegisterInfo");
+                  setIsLoading(false);
                 } else {
                   const { accessToken } = await getTokens();
                   const userAttr = await getAPIUser(data.email, accessToken);
@@ -137,6 +141,8 @@ export default function LoginScreen({
                       profileURL: picture,
                     })
                   );
+                  setIsLoading(false);
+                  navigation.navigate("Root");
                 }
               });
             })}
@@ -144,9 +150,12 @@ export default function LoginScreen({
             Sign In
           </Button>
           <Button
+            loading={isLoading}
             mode="contained"
             onPress={handleSubmit((data) => {
+              setIsLoading(true);
               handleCogntioRegister(data.email, data.password).then(() => {
+                setIsLoading(false);
                 navigation.navigate("RegisterInfo");
               });
             })}

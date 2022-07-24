@@ -8,25 +8,22 @@ interface State {
   department: null | string;
 }
 
+const initialState: State = {
+  name: null,
+  email: null,
+  profileURL: null,
+  department: null,
+};
+
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    name: null,
-    email: null,
-    profileURL: null,
-    department: null,
-  } as State,
+  initialState: initialState,
   reducers: {
     login: (state, action: PayloadAction<State>) => {
-      state = action.payload;
+      return action.payload;
     },
     logout: (state) => {
-      state = {
-        name: null,
-        email: null,
-        profileURL: null,
-        department: null,
-      };
+      return initialState;
     },
   },
 });
