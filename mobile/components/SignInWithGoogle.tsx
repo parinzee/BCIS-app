@@ -2,17 +2,47 @@ import * as React from "react";
 import * as Linking from "expo-linking";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
-import { URLConfiguration } from "../utils/AWSCognito";
+import {
+  getTokens,
+  getUserAttributes,
+  URLConfiguration,
+} from "../utils/AWSCognito";
 import { handleGoogleCognitoCallback } from "../utils/AWSCognito";
 import FastImage from "react-native-fast-image";
+import { APIUserExists, getAPIUser } from "../utils/API";
+import * as SecureStore from "expo-secure-store";
+import { useDispatch } from "react-redux";
+import { login } from "../slices/userSlice";
+import { useNavigation } from "@react-navigation/native";
 
 export default function SignInWithGoogle() {
+  // Using the hook for component reusability
+  const navigation = useNavigation();
   const [isLoading, setIsLoading] = React.useState(false);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     const subscription = Linking.addEventListener("url", async (event) => {
       setIsLoading(true);
-      await handleGoogleCognitoCallback(event);
+      await handleGoogleCognitoCallback(event).then(async () => {
+        const { accessToken } = await getTokens();
+        const { email, picture } = await getUserAttributes(accessToken);
+        const userExists = await APIUserExists(email as string);
+        if (!userExists) {
+          navigation.navigate("RegisterInfo");
+        } else {
+          const APIUser = await getAPIUser(email as string, accessToken);
+          dispatch(
+            login({
+              name: APIUser.name,
+              email: email,
+              department: APIUser.department,
+              profileURL: picture,
+            })
+          );
+          navigation.navigate("Root");
+        }
+      });
       setIsLoading(false);
     });
 

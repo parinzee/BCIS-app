@@ -26,6 +26,7 @@ import { RootStackParamList, RootTabParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { Theme } from "../types";
 import FastImage from "react-native-fast-image";
+import RegisterInfoScreen from "../screens/RegisterInfoScreen";
 
 export default function Navigation({ theme }: { theme: Theme }) {
   return (
@@ -49,12 +50,17 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name="RegisterInfo"
+        component={RegisterInfoScreen}
+        options={{ headerShown: true, title: "Registration Info" }}
+      />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: true }}
-        />
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>

@@ -1,6 +1,8 @@
 import * as React from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import { List, Avatar, Title, Divider } from "react-native-paper";
+import { getUserAttributes } from "../utils/AWSCognito";
+import * as SecureStore from "expo-secure-store";
 
 interface NavigationItem {
   title: string;

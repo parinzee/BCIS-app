@@ -2,7 +2,7 @@ import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import * as Linking from "expo-linking";
 import { Platform } from "react-native";
-import { serverURL } from "../constants/API";
+import { serverURL } from "./API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const registerForPushNotificationsAsync = async () => {

@@ -1,7 +1,9 @@
-from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, permissions, mixins
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.response import Response
+
+from backend.api.authentication import CognitoTokenAuthentication
 from .serializers import (
     FeaturedSerializer,
     GPAScoreSerializer,
@@ -33,7 +35,15 @@ class AppUserViewSet(viewsets.ModelViewSet):
 
     queryset = AppUser.objects.all()
     serializer_class = AppUserSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.IsAuthenticated]
+    # User must be on Cognito to add their user data here
+    authentication_classes = [CognitoTokenAuthentication]
+
+    @action(methods=["GET"], detail=False, url_path="email")
+    def getByUsername(self, request):
+        user = get_object_or_404(AppUser, email=request.query_params["email"])
+        data = AppUserSerializer(user, context={"request": request}).data
+        return Response(data, status=200)
 
 
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):
@@ -131,6 +141,21 @@ def verse_of_day(request):
     )
 
 
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny,))
+def user_exists(request):
+    if "email" in request.query_params:
+        return Response(
+            {
+                "exists": AppUser.objects.filter(
+                    email=request.query_params["email"]
+                ).exists()
+            }
+        )
+    else:
+        return Response({"message": "No query parameter"}, status=400)
+
+
 class PushIDViewSet(
     mixins.CreateModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet
 ):
@@ -147,4 +172,5 @@ class GPAScoreViewset(
 ):
     queryset = GPAScore.objects.all()
     serializer_class = GPAScoreSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [CognitoTokenAuthentication]

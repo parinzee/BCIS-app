@@ -9,7 +9,8 @@ import linking from "../navigation/LinkingConfiguration";
 import { Alert } from "react-native";
 
 const clientId = "23ae5q6guet1m77chghqcfjda";
-const poolID = "ap-southeast-1_bzlNrqEFt";
+const region = "ap-southeast-1";
+const poolID = `${region}_bzlNrqEFt`;
 const redirectURI = linking.prefixes[0] + "login";
 
 const userPool = new CognitoUserPool({
@@ -18,11 +19,11 @@ const userPool = new CognitoUserPool({
 });
 
 const URLConfiguration = {
-  baseURL: "https://bcis-app.auth.ap-southeast-1.amazoncognito.com/",
-  hostedUiURL: `https://bcis-app.auth.ap-southeast-1.amazoncognito.com/login?client_id=${clientId}&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+profile&redirect_uri=${redirectURI}`,
-  googleURL: `https://bcis-app.auth.ap-southeast-1.amazoncognito.com/oauth2/authorize?identity_provider=Google&redirect_uri=${redirectURI}&response_type=CODE&client_id=${clientId}&scope=aws.cognito.signin.user.admin email openid profile`,
-  tokenURL:
-    "https://bcis-app.auth.ap-southeast-1.amazoncognito.com/oauth2/token",
+  baseURL: `https://bcis-app.auth.${region}.amazoncognito.com/`,
+  hostedUiURL: `https://bcis-app.auth.${region}.amazoncognito.com/login?client_id=${clientId}&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+profile&redirect_uri=${redirectURI}`,
+  googleURL: `https://bcis-app.auth.${region}.amazoncognito.com/oauth2/authorize?identity_provider=Google&redirect_uri=${redirectURI}&response_type=CODE&client_id=${clientId}&scope=aws.cognito.signin.user.admin email openid profile`,
+  tokenURL: `https://bcis-app.auth.${region}.amazoncognito.com/oauth2/token`,
+  cognitoAPIURL: `https://cognito-idp.${region}.amazonaws.com/`,
 };
 
 const downloadTokens = async (code: string) => {
@@ -39,6 +40,7 @@ const downloadTokens = async (code: string) => {
     .then((response) => response.json())
     .catch((err) => console.error(err));
 
+  console.log(data);
   for (const [key, value] of Object.entries(data)) {
     if (typeof value == "string") await SecureStore.setItemAsync(key, value);
   }
@@ -69,6 +71,34 @@ const refreshTokens = async (refreshToken: string) => {
 
   // Set last refresh
   await SecureStore.setItemAsync("last_refresh", new Date().toISOString());
+};
+
+const getUserAttributes = async (access_token: string) => {
+  let attr: { [key: string]: string | null } = {
+    sub: null,
+    identities: null,
+    email_verified: null,
+    name: null,
+    email: null,
+    picture: null,
+  };
+
+  const data = await fetch(URLConfiguration.cognitoAPIURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": " application/x-amz-json-1.1",
+      "X-Amz-Target": "AWSCognitoIdentityProviderService.GetUser",
+    },
+    body: JSON.stringify({ AccessToken: access_token }),
+  })
+    .then((resp) => resp.json())
+    .catch((err) => console.log(err));
+
+  data["UserAttributes"].forEach((element: { [key: string]: string }) => {
+    attr[element["Name"]] = element["Value"];
+  });
+
+  return attr;
 };
 
 const handleGoogleCognitoCallback = async (event: Linking.EventType) => {
@@ -121,10 +151,38 @@ const handleCogntioLogin = async (email: string, password: string) => {
   });
 };
 
+const getTokens = async () => {
+  const currDate = new Date();
+  const lastRefresh = new Date(
+    (await SecureStore.getItemAsync("last_refresh")) as string
+  );
+
+  const refreshToken = (await SecureStore.getItemAsync(
+    "refresh_token"
+  )) as string;
+
+  // If more than one day since last refresh, then refresh tokens
+  if (
+    (currDate.getTime() - lastRefresh.getTime()) / (1000 * 60 * 60 * 24) >=
+    1
+  ) {
+    await refreshTokens(refreshToken);
+  }
+
+  const idToken = (await SecureStore.getItemAsync("id_token")) as string;
+  const accessToken = (await SecureStore.getItemAsync(
+    "access_token"
+  )) as string;
+
+  return { idToken, accessToken };
+};
+
 export {
   URLConfiguration,
   handleGoogleCognitoCallback,
   handleCogntioRegister,
   handleCogntioLogin,
   refreshTokens,
+  getUserAttributes,
+  getTokens,
 };

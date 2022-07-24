@@ -34,4 +34,5 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls")),
     path("team-scores/", views.team_scores),
     path("verse-of-day", views.verse_of_day),
+    path("user-exists", views.user_exists),
 ]
