@@ -40,7 +40,6 @@ const downloadTokens = async (code: string) => {
     .then((response) => response.json())
     .catch((err) => console.error(err));
 
-  console.log(data);
   for (const [key, value] of Object.entries(data)) {
     if (typeof value == "string") await SecureStore.setItemAsync(key, value);
   }

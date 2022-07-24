@@ -197,7 +197,7 @@ export default function RegisterInfoScreen() {
                   "Please check your internet or try again later."
                 );
               });
-            // navigation.navigate("Root");
+            navigation.navigate("Root");
           })}
           rippleColor="rgba(0, 0, 0, .32)"
           style={{ marginTop: 10, borderRadius: 45 }}
