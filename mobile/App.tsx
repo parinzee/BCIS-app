@@ -41,21 +41,21 @@ export default function App() {
       <GestureHandlerRootView
         style={{ flex: 1, backgroundColor: theme.colors.background }}
       >
-        <ReduxProvider store={store}>
-          <PersistGate
-            loading={
-              <View
-                style={{ flex: 1, backgroundColor: theme.colors.background }}
-              />
-            }
-            persistor={persistor}
-          >
-            <PaperProvider theme={theme}>
+        <PaperProvider theme={theme}>
+          <ReduxProvider store={store}>
+            <PersistGate
+              loading={
+                <View
+                  style={{ flex: 1, backgroundColor: theme.colors.background }}
+                />
+              }
+              persistor={persistor}
+            >
               <Navigation theme={theme} />
               <StatusBar />
-            </PaperProvider>
-          </PersistGate>
-        </ReduxProvider>
+            </PersistGate>
+          </ReduxProvider>
+        </PaperProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>
   );

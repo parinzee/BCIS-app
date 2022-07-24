@@ -30,6 +30,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import FastImage from "react-native-fast-image";
 import { Avatar } from "react-native-paper";
+import WebviewScreen from "../screens/WebviewScreen";
 
 export default function Navigation({ theme }: { theme: Theme }) {
   return (
@@ -52,6 +53,11 @@ function RootNavigator() {
         name="Root"
         component={BottomTabNavigator}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="WebviewScreen"
+        component={WebviewScreen}
+        options={{ headerShown: true }}
       />
       <Stack.Screen
         name="Login"

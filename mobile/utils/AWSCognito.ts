@@ -7,6 +7,7 @@ import {
 } from "amazon-cognito-identity-js";
 import linking from "../navigation/LinkingConfiguration";
 import { Alert } from "react-native";
+import { getAPIUser } from "./API";
 
 const clientId = "23ae5q6guet1m77chghqcfjda";
 const region = "ap-southeast-1";
@@ -112,7 +113,17 @@ const handleCogntioRegister = async (email: string, password: string) => {
   }, 1500);
 };
 
-const handleCogntioLogin = async (email: string, password: string) => {
+const handleCogntioLogin = async (
+  email: string,
+  password: string,
+  updateStateCallback?: ({
+    name,
+    email,
+    department,
+  }: {
+    [key: string]: string;
+  }) => void
+) => {
   const user = new CognitoUser({
     Username: email,
     Pool: userPool,
@@ -135,6 +146,15 @@ const handleCogntioLogin = async (email: string, password: string) => {
         SecureStore.setItemAsync("refresh_token", refreshToken),
         SecureStore.setItemAsync("last_refresh", new Date().toISOString()),
       ]);
+
+      if (updateStateCallback != undefined) {
+        const userAttr = await getAPIUser(email, accessToken);
+        updateStateCallback({
+          name: userAttr.name,
+          email: userAttr.email,
+          department: userAttr.department,
+        });
+      }
     },
     onFailure: (err) => {
       Alert.alert(

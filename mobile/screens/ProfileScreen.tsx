@@ -75,10 +75,23 @@ function AuthenticatedView() {
       },
     },
     {
+      title: "School Calendar",
+      icon: "calendar",
+      onPress: () => {
+        navigation.navigate("WebviewScreen", {
+          title: "School Calendar",
+          url: "https://bcis-app.s3.ap-southeast-1.amazonaws.com/2022-2023+Tentative+BCIS+Calendar.pdf",
+        });
+      },
+    },
+    {
       title: "Anonymous Feedback",
       icon: "chat-question",
       onPress: () => {
-        Linking.openURL("https://forms.gle/VkWpj68KLUCwEc1C7");
+        navigation.navigate("WebviewScreen", {
+          title: "Feedback",
+          url: "https://forms.gle/VkWpj68KLUCwEc1C7",
+        });
       },
     },
     {

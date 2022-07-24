@@ -31,8 +31,6 @@ export default function SignInWithGoogle() {
           navigation.navigate("RegisterInfo");
         } else {
           const APIUser = await getAPIUser(email as string, accessToken);
-          console.log(accessToken);
-          console.log(APIUser);
           dispatch(
             login({
               name: APIUser.name,

@@ -24,6 +24,7 @@ export type RootStackParamList = {
   Modal: undefined;
   Login: undefined;
   RegisterInfo: undefined;
+  WebviewScreen: { url: string; title: string };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
