@@ -1,0 +1,41 @@
+appdirs==1.4.4; python_version >= "3.7" and python_version < "4.0"
+asgiref==3.5.2; python_version >= "3.8"
+attrs==21.4.0; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.5.0" \
+    --hash=sha256:2d27e3784d7a565d36ab851fe94887c5eccd6a463168875832a1be79c82828b4 \
+    --hash=sha256:626ba8234211db98e869df76230a137c4c40a12d72445c45d5f5b716f076e2fd
+boto3==1.24.35; python_version >= "3.7"
+botocore==1.27.35; python_version >= "3.7"
+cattrs==22.1.0; python_version >= "3.7" and python_version < "4.0"
+certifi==2022.6.15; python_version >= "3.7" and python_version < "4"
+cffi==1.15.1; python_version >= "3.6"
+charset-normalizer==2.1.0; python_version >= "3.7" and python_version < "4" and python_full_version >= "3.6.0"
+cryptography==37.0.4; python_version >= "3.6"
+django-colorfield==0.7.2
+django-filter==21.1; python_version >= "3.6"
+django-storages==1.12.3; python_version >= "3.5"
+django==4.0.5; python_version >= "3.8"
+djangorestframework==3.13.1; python_version >= "3.6"
+ecdsa==0.18.0; python_version >= "2.6" and python_full_version < "3.0.0" or python_full_version >= "3.3.0"
+exceptiongroup==1.0.0rc8; python_full_version >= "3.10.0" and python_full_version < "4.0.0" and python_version >= "3.7" and python_version <= "3.10"
+idna==3.3; python_version >= "3.7" and python_version < "4"
+jmespath==1.0.1; python_version >= "3.7"
+markdown==3.3.7; python_version >= "3.6"
+pillow==9.2.0; python_version >= "3.7"
+psycopg2-binary==2.9.3; python_version >= "3.6"
+pyasn1==0.4.8; python_version >= "3.6" and python_version < "4"
+pycparser==2.21; python_version >= "3.6" and python_full_version < "3.0.0" or python_version >= "3.6" and python_full_version >= "3.4.0" \
+    --hash=sha256:8ee45429555515e1f6b185e78100aea234072576aa43ab53aefcae078162fca9 \
+    --hash=sha256:e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206
+python-dateutil==2.8.2; python_version >= "3.7" and python_full_version < "3.0.0" or python_full_version >= "3.3.0" and python_version >= "3.7"
+python-jose==3.3.0
+pytz==2022.1; python_version >= "3.6"
+requests-cache==0.9.5; python_version >= "3.7" and python_version < "4.0"
+requests==2.28.1; python_version >= "3.7" and python_version < "4"
+rsa==4.9; python_version >= "3.6" and python_version < "4"
+s3transfer==0.6.0; python_version >= "3.7"
+sentry-sdk==1.8.0
+six==1.16.0; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.6.0"
+sqlparse==0.4.2; python_version >= "3.8"
+tzdata==2022.1; sys_platform == "win32" and python_version >= "3.8"
+url-normalize==1.4.3; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4.0" or python_version >= "3.7" and python_version < "4.0" and python_full_version >= "3.6.0"
+urllib3==1.26.10; python_version >= "3.7" and python_full_version < "3.0.0" and python_version < "4" or python_full_version >= "3.6.0" and python_version < "4" and python_version >= "3.7"
