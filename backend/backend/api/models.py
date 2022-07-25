@@ -64,18 +64,6 @@ class Activity(models.Model):
     def __str__(self) -> str:
         return f"{self.title} - {self.date_updated}"
 
-    def clean(self) -> None:
-        if self.thumbnail_URL is not None and self.thumbnail_File != "":
-            raise ValidationError(
-                _(
-                    "Thumbnail URL and Thumbnail File may not be filled at the same time."
-                )
-            )
-        elif self.thumbnail_URL is None and self.thumbnail_File == "":
-            raise ValidationError(
-                _("Either Thumbnail URL or Thumbnail File must be specified")
-            )
-
 
 class Portfolio(models.Model):
     title = models.CharField("title", max_length=60)
