@@ -55,9 +55,21 @@ function AvatarWrapper({ user }: AvatarWrapperProps) {
   }
 }
 
-function AuthenticatedView() {
+function AuthenticatedView({ user }: { user: RootState["user"] }) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
+  let handbookURL = "https://www.bcis.ac.th/academic/download/";
+  if (user.department == "K") {
+    handbookURL =
+      "https://www.bcis.ac.th/wp-content/uploads/2021/08/BICN-Parents-Handbook-SY2021-2022.pdf";
+  } else if (user.department == "E") {
+    handbookURL =
+      "https://www.bcis.ac.th/wp-content/uploads/2021/08/Copy-of-Elementary-Handbook-2021-2022.pdf";
+  } else if (user.department == "H") {
+    handbookURL =
+      "https://www.bcis.ac.th/wp-content/uploads/2021/08/HS-Parent-Student-Handbook-2021-2022.pdf";
+  }
 
   const NavigationItems: NavigationItemProps[] = [
     {
@@ -68,27 +80,30 @@ function AuthenticatedView() {
       },
     },
     {
-      title: "My Rewards",
-      icon: "medal",
-      onPress: () => {
-        navigation.navigate("MyRewards");
-      },
-    },
-    {
       title: "School Calendar",
       icon: "calendar",
       onPress: () => {
-        navigation.navigate("WebviewScreen", {
+        navigation.navigate("Webview", {
           title: "School Calendar",
           url: "https://bcis-app.s3.ap-southeast-1.amazonaws.com/2022-2023+Tentative+BCIS+Calendar.pdf",
         });
       },
     },
     {
-      title: "Anonymous Feedback",
+      title: "Student Handbook",
+      icon: "book-account",
+      onPress: () => {
+        navigation.navigate("Webview", {
+          title: "Student Handbook",
+          url: handbookURL,
+        });
+      },
+    },
+    {
+      title: "Feedback",
       icon: "chat-question",
       onPress: () => {
-        navigation.navigate("WebviewScreen", {
+        navigation.navigate("Webview", {
           title: "Feedback",
           url: "https://forms.gle/VkWpj68KLUCwEc1C7",
         });
@@ -135,11 +150,8 @@ function UnauthenticatedView() {
         </Text>
         <Text style={styles.text}>✅ Reward System</Text>
         <Text style={styles.text}>✅ Anonymous Feedback</Text>
-        <Text style={styles.text}>
-          ✅ Easy Access to{" "}
-          <Text style={{ ...styles.text, fontWeight: "bold" }}>
-            School Calendar
-          </Text>
+        <Text style={{ ...styles.text, fontWeight: "bold" }}>
+          ✅ School Calendar
         </Text>
         <Text style={styles.text}>✅ Easy Access to Student Handbook</Text>
       </View>
@@ -169,7 +181,11 @@ export default function ProfileScreen() {
         <Title style={styles.name}>Guest User</Title>
       )}
       <Divider />
-      {user.email != null ? <AuthenticatedView /> : <UnauthenticatedView />}
+      {user.email != null ? (
+        <AuthenticatedView user={user} />
+      ) : (
+        <UnauthenticatedView />
+      )}
     </View>
   );
 }

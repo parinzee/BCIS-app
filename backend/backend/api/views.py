@@ -40,7 +40,7 @@ class AppUserViewSet(viewsets.ModelViewSet):
     authentication_classes = [CognitoTokenAuthentication]
 
     @action(methods=["GET"], detail=False, url_path="email")
-    def getByUsername(self, request):
+    def getByEmail(self, request):
         user = get_object_or_404(AppUser, email=request.query_params["email"])
         data = AppUserSerializer(user, context={"request": request}).data
         return Response(data, status=200)
@@ -174,3 +174,11 @@ class GPAScoreViewset(
     serializer_class = GPAScoreSerializer
     permission_classes = [permissions.IsAuthenticated]
     authentication_classes = [CognitoTokenAuthentication]
+
+    @action(methods=["GET"], detail=False, url_path="email")
+    def getByEmail(self, request):
+        user = get_object_or_404(AppUser, email=request.query_params["email"])
+        # Return top 4 objects for that user
+        query = GPAScore.objects.filter(user=user).order_by("date_added").reverse()[:4]
+        data = GPAScoreSerializer(query, many=True, context={"request": request}).data
+        return Response(data, status=200)

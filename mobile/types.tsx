@@ -24,7 +24,8 @@ export type RootStackParamList = {
   Modal: undefined;
   Login: undefined;
   RegisterInfo: undefined;
-  WebviewScreen: { url: string; title: string };
+  Webview: { url: string; title: string };
+  GradeCalculator: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
@@ -105,4 +106,10 @@ export interface Votd {
     display_ref: string;
   };
   bg_URL: string;
+}
+
+export interface GPAScore {
+  user: string;
+  date_added: string;
+  gpa: string;
 }

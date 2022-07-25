@@ -31,6 +31,7 @@ import { RootState } from "../store";
 import FastImage from "react-native-fast-image";
 import { Avatar } from "react-native-paper";
 import WebviewScreen from "../screens/WebviewScreen";
+import GradeCalculatorScreen from "../screens/GradeCalculatorScreen";
 
 export default function Navigation({ theme }: { theme: Theme }) {
   return (
@@ -55,9 +56,14 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="WebviewScreen"
+        name="Webview"
         component={WebviewScreen}
         options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name="GradeCalculator"
+        component={GradeCalculatorScreen}
+        options={{ headerShown: true, title: "Grade Calculator" }}
       />
       <Stack.Screen
         name="Login"
@@ -116,8 +122,8 @@ function BottomTabNavigator() {
         name="Portfolio"
         component={PortfolioScreen}
         options={{
-          title: "Student Portoflio & Certificates",
-          tabBarLabel: "Portfolios",
+          title: "Hall of Fame (Student Portfolios)",
+          tabBarLabel: "Hall of Fame",
           // Fix icon styling on large screens. React Navigation cuts off the icon since it's wide.
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons

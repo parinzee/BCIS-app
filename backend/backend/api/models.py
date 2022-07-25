@@ -124,4 +124,7 @@ class AppUser(models.Model):
 class GPAScore(models.Model):
     user = models.ForeignKey(AppUser, on_delete=models.CASCADE)
     date_added = models.DateTimeField("date added")
-    gpa = models.DecimalField("cumulative gpa", max_digits=5, decimal_places=3)
+    gpa = models.DecimalField("cumulative gpa", max_digits=6, decimal_places=3)
+
+    def __str__(self) -> str:
+        return f'"{self.gpa}" by {self.user} on {self.date_added}'
