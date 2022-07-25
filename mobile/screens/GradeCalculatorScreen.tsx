@@ -255,7 +255,7 @@ function ElementaryCalculator({
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <Surface style={styles.calculatorSurface}>
           <Title style={{ textAlign: "center" }}>
             Elementary Grade Calculator
@@ -324,7 +324,7 @@ function HSStandardsCalculator({
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <Surface style={styles.calculatorSurface}>
           <Title style={{ textAlign: "center" }}>
             HS Grade Calculator (G7-9 & Standards Class)
@@ -459,7 +459,7 @@ function HSHonorsCalculator({
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <Surface style={styles.calculatorSurface}>
           <Title style={{ textAlign: "center" }}>
             HS Grade Calculator (G10-12)

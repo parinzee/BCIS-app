@@ -7,18 +7,14 @@ import {
   Title,
   Divider,
   TouchableRipple,
-  Subheading,
 } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import FastImage from "react-native-fast-image";
-import LottieView from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
-import * as Linking from "expo-linking";
 import { logout } from "../slices/userSlice";
-import { Feather } from "@expo/vector-icons";
-import useTheme from "../hooks/useTheme";
 import { clearAuthTokens } from "../utils/AWSCognito";
+import SignupBenefits from "../components/SignupBenefits";
 
 interface NavigationItemProps {
   title: string;
@@ -130,46 +126,6 @@ function AuthenticatedView({ user }: { user: RootState["user"] }) {
   );
 }
 
-function UnauthenticatedView() {
-  const theme = useTheme();
-  const navigation = useNavigation();
-
-  return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <LottieView
-        source={require("../assets/lottie/giftbox.json")}
-        style={{ width: 100, height: 100 }}
-        autoPlay
-        loop
-      />
-      <Title>Sign In / Register</Title>
-      <Subheading>To Access Numerous Benefits!</Subheading>
-      <View style={{ marginVertical: 10 }}>
-        <Text style={{ ...styles.text, fontWeight: "bold" }}>
-          ✅ Grade Calculator
-        </Text>
-        <Text style={styles.text}>✅ Reward System</Text>
-        <Text style={styles.text}>✅ Anonymous Feedback</Text>
-        <Text style={{ ...styles.text, fontWeight: "bold" }}>
-          ✅ School Calendar
-        </Text>
-        <Text style={styles.text}>✅ Easy Access to Student Handbook</Text>
-      </View>
-      <TouchableRipple
-        style={{ borderRadius: 45, marginTop: 10 }}
-        onPress={() => navigation.navigate("Login")}
-        rippleColor="rgba(0, 0, 0, .32)"
-      >
-        <Feather
-          name="arrow-right-circle"
-          color={theme.colors.primary}
-          size={45}
-        />
-      </TouchableRipple>
-    </View>
-  );
-}
-
 export default function ProfileScreen() {
   const user = useSelector((state: RootState) => state.user);
   return (
@@ -184,7 +140,7 @@ export default function ProfileScreen() {
       {user.email != null ? (
         <AuthenticatedView user={user} />
       ) : (
-        <UnauthenticatedView />
+        <SignupBenefits />
       )}
     </View>
   );

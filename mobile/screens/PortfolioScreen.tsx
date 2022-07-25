@@ -4,11 +4,16 @@ import useLayout from "../hooks/useLayout";
 import { ActivityIndicator, Colors, Title } from "react-native-paper";
 import { useGetPortfoliosQuery } from "../slices/apiSlice";
 import useTheme from "../hooks/useTheme";
+import SignupBenefits from "../components/SignupBenefits";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 export default function PortfolioScreen() {
   const layout = useLayout();
   const itemImageBackground = useTheme().colors.backdrop;
   const itemWidth = layout.isSmallDevice ? 315 : 350;
+
+  const userEmail = useSelector((state: RootState) => state.user.email);
 
   const {
     data: portfolios,
@@ -21,7 +26,9 @@ export default function PortfolioScreen() {
 
   let content;
 
-  if (isLoading) {
+  if (userEmail == null) {
+    content = <SignupBenefits />;
+  } else if (isLoading) {
     content = (
       <ActivityIndicator
         color={Colors.blue300}
