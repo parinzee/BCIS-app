@@ -35,7 +35,7 @@ def notify_users(sender, instance, **kwargs):
         push_ids = list(map(lambda x: x.push_id, list(PushID.objects.all())))
 
         payload = {
-            "to": "asda",
+            "to": push_ids,
             "title": title,
             "subtitle": f"New {sender.__name__}!",
             "body": instance.content,

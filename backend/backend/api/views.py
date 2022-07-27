@@ -26,6 +26,14 @@ from .models import (
 
 import html
 import requests_cache
+import re
+
+CLEANR = re.compile("<.*?>")
+
+
+def cleanhtml(raw_html):
+    cleantext = re.sub(CLEANR, "", raw_html)
+    return cleantext
 
 
 class AppUserViewSet(viewsets.ModelViewSet):
@@ -129,11 +137,13 @@ def verse_of_day(request):
 
     session.close()
 
+    unescaped = html.unescape(votd["content"])
+
     return Response(
         {
             "votd": {
                 # Biblegateway returns an escaped html string so we have to unescape it (eg: change &amp; to &)
-                "content": html.unescape(votd["content"]),
+                "content": cleanhtml(unescaped),
                 "display_ref": votd["display_ref"],
             },
             "bg_URL": bg_URL,
