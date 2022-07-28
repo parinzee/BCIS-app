@@ -1,4 +1,5 @@
-const serverURL = "http://192.168.1.107:8000";
+// const serverURL = "https://52.74.235.69.nip.io";
+const serverURL = "http://0.0.0.0:8000";
 
 interface APIUser {
   url: string;
@@ -33,9 +34,12 @@ const registerAPIUser = async (
 };
 
 const APIUserExists = async (email: string) => {
-  const result = await fetch(`${serverURL}/user-exists?email=${email}`, {
-    method: "GET",
-  }).then((resp) => resp.json());
+  const result = await fetch(
+    `${serverURL}/user-exists?email=${encodeURIComponent(email)}`,
+    {
+      method: "GET",
+    }
+  ).then((resp) => resp.json());
 
   return result["exists"];
 };
@@ -54,4 +58,13 @@ const getAPIUser = async (email: string, accessToken: string) => {
   return (await result.json()) as APIUser;
 };
 
-export { serverURL, registerAPIUser, APIUserExists, getAPIUser };
+const deleteAPIUser = async (email: string, accessToken: string) => {
+  await fetch(`${serverURL}/users/delete/?email=${encodeURIComponent(email)}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${accessToken}`,
+    },
+  });
+};
+
+export { serverURL, registerAPIUser, APIUserExists, getAPIUser, deleteAPIUser };

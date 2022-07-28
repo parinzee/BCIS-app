@@ -1,7 +1,6 @@
 import * as React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Alert } from "react-native";
 import {
-  Text,
   List,
   Avatar,
   Title,
@@ -13,8 +12,9 @@ import { RootState } from "../store";
 import FastImage from "react-native-fast-image";
 import { useNavigation } from "@react-navigation/native";
 import { logout } from "../slices/userSlice";
-import { clearAuthTokens } from "../utils/AWSCognito";
+import { clearAuthTokens, getTokens } from "../utils/AWSCognito";
 import SignupBenefits from "../components/SignupBenefits";
+import { deleteAPIUser } from "../utils/API";
 
 interface NavigationItemProps {
   title: string;
@@ -103,6 +103,40 @@ function AuthenticatedView({ user }: { user: RootState["user"] }) {
           title: "Feedback",
           url: "https://forms.gle/VkWpj68KLUCwEc1C7",
         });
+      },
+    },
+    {
+      title: "Privacy Policy",
+      icon: "shield-check",
+      onPress: () => {
+        navigation.navigate("Webview", {
+          title: "Privacy Policy",
+          url: "https://github.com/parinzee/BCIS-app/blob/main/PRIVACY.md",
+        });
+      },
+    },
+    {
+      title: "Delete Account",
+      icon: "alert",
+      onPress: async () => {
+        Alert.alert(
+          "This action is irreversible",
+          "Are you sure you would like to DELETE ALL YOUR DATA?",
+          [
+            {
+              text: "Delete all data",
+              style: "destructive",
+              onPress: async () => {
+                const { accessToken } = await getTokens();
+                await clearAuthTokens();
+                // This can only be called when the user is logged in
+                await deleteAPIUser(user.email as string, accessToken);
+                dispatch(logout());
+              },
+            },
+            { text: "Cancel" },
+          ]
+        );
       },
     },
     {

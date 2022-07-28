@@ -4,6 +4,7 @@ import {
   CognitoUserPool,
   CognitoUser,
   AuthenticationDetails,
+  CognitoUserSession,
 } from "amazon-cognito-identity-js";
 import linking from "../navigation/LinkingConfiguration";
 import { Alert } from "react-native";
@@ -116,7 +117,7 @@ const handleCogntioRegister = async (email: string, password: string) => {
 const handleCogntioLogin = async (
   email: string,
   password: string,
-  updateStateCallback?: ({
+  onSuccessLogin?: ({
     name,
     email,
     department,
@@ -147,9 +148,9 @@ const handleCogntioLogin = async (
         SecureStore.setItemAsync("last_refresh", new Date().toISOString()),
       ]);
 
-      if (updateStateCallback != undefined) {
+      if (onSuccessLogin != undefined) {
         const userAttr = await getAPIUser(email, accessToken);
-        updateStateCallback({
+        onSuccessLogin({
           name: userAttr.name,
           email: userAttr.email,
           department: userAttr.department,

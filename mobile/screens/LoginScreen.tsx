@@ -124,8 +124,9 @@ export default function LoginScreen({
               // Due to the API dispatch and navigation must be called from inside handleCognitoLogin
               const userExists = await APIUserExists(data.email);
               if (!userExists) {
-                await handleCogntioLogin(data.email, data.password);
-                navigation.navigate("RegisterInfo");
+                await handleCogntioLogin(data.email, data.password, () => {
+                  navigation.navigate("RegisterInfo");
+                });
               } else {
                 await handleCogntioLogin(
                   data.email,

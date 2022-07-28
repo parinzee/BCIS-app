@@ -27,8 +27,10 @@ from .models import (
 import html
 import requests_cache
 import re
+import boto3
 
 CLEANR = re.compile("<.*?>")
+client = boto3.client("cognito-idp", region_name="ap-southeast-1")
 
 
 def cleanhtml(raw_html):
@@ -57,6 +59,10 @@ class AppUserViewSet(viewsets.ModelViewSet):
     def deleteByEmail(self, request):
         user = get_object_or_404(AppUser, email=request.query_params["email"])
         data = AppUserSerializer(user, context={"request": request}).data
+        client.admin_delete_user(
+            UserPoolId="ap-southeast-1_bzlNrqEFt",
+            Username=request.query_params["email"],
+        )
         self.perform_destroy(user)
         return Response(data, status=200)
 
