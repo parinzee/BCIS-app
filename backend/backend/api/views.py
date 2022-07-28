@@ -53,6 +53,13 @@ class AppUserViewSet(viewsets.ModelViewSet):
         data = AppUserSerializer(user, context={"request": request}).data
         return Response(data, status=200)
 
+    @action(methods=["DELETE"], detail=False, url_path="delete")
+    def deleteByEmail(self, request):
+        user = get_object_or_404(AppUser, email=request.query_params["email"])
+        data = AppUserSerializer(user, context={"request": request}).data
+        self.perform_destroy(user)
+        return Response(data, status=200)
+
 
 class NewsViewSet(viewsets.ReadOnlyModelViewSet):
     """
