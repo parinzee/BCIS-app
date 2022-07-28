@@ -23,7 +23,7 @@ export default function WebviewScreen({
         source={{ uri: route.params.url }}
         javaScriptEnabled={true}
         domStorageEnabled={true}
-        onLoadEnd={() => {
+        onLoad={() => {
           setIsloading(false);
         }}
       />
