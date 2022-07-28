@@ -22,15 +22,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.parinzee.bcis-sc-app",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.1"
     },
     "android": {
       "package": "com.parinzee.bcis_sc_app",
       "googleServicesFile": "./google-services.json",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
       "versionCode": 1
     },
     "web": {

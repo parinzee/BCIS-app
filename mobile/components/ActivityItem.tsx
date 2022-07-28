@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable } from "react-native";
+import { StyleSheet, View, Pressable, Platform } from "react-native";
 import { Caption, Surface, Title } from "react-native-paper";
 import Markdown from "react-native-markdown-display";
 import MarkdownRenderRules from "../constants/MarkdownRenderRules";
@@ -76,6 +76,8 @@ export default function ActivityItem({
             // isLoading is true
             source={{ uri: imageEncoding as string }}
             style={{ ...styles.thumbnail, width: width }}
+            // https://github.com/DylanVann/react-native-fast-image/issues/710
+            fallback={Platform.OS == "android" ? true : false}
           >
             {videoURL != null ? (
               <View

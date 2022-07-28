@@ -1,5 +1,5 @@
-// const serverURL = "https://52.74.235.69.nip.io";
-const serverURL = "http://0.0.0.0:8000";
+const serverURL = "https://52.74.235.69.nip.io";
+// const serverURL = "http://0.0.0.0:8000";
 
 interface APIUser {
   url: string;

@@ -1,9 +1,10 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import WebView from "react-native-webview";
 import { RootStackScreenProps } from "../types";
 import * as React from "react";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import useTheme from "../hooks/useTheme";
+import * as Linking from "expo-linking";
 
 export default function WebviewScreen({
   navigation,
@@ -13,8 +14,14 @@ export default function WebviewScreen({
   const theme = useTheme();
 
   React.useEffect(() => {
-    navigation.setOptions({ title: route.params.title });
+    if (Platform.OS == "android") {
+      navigation.navigate("Root");
+      Linking.openURL(route.params.url);
+    } else {
+      navigation.setOptions({ title: route.params.title });
+    }
   }, []);
+
   return (
     <>
       <WebView
