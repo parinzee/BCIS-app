@@ -30,6 +30,13 @@
         <data android:scheme="com.parinzee.bcis_sc_app"/>
         <data android:scheme="exp+bcis-sc-app"/>
       </intent-filter>
+      <intent-filter data-generated="true">
+        <action android:name="android.intent.action.VIEW"/>
+        <data android:scheme="com.parinzee.bcis_sc_app"/>
+        <data android:scheme="exp+bcis-sc-app"/>
+        <category android:name="android.intent.category.BROWSABLE"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+      </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>
   </application>

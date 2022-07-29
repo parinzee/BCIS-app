@@ -1,6 +1,5 @@
 import * as React from "react";
-import * as Linking from "expo-linking";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native";
 import { ActivityIndicator, Colors } from "react-native-paper";
 import {
   getTokens,
@@ -13,6 +12,7 @@ import { APIUserExists, getAPIUser } from "../utils/API";
 import { useDispatch } from "react-redux";
 import { login } from "../slices/userSlice";
 import { useNavigation } from "@react-navigation/native";
+import * as WebBrowser from "expo-web-browser";
 
 export default function SignInWithGoogle() {
   // Using the hook for component reusability
@@ -20,41 +20,45 @@ export default function SignInWithGoogle() {
   const [isLoading, setIsLoading] = React.useState(false);
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    const subscription = Linking.addEventListener("url", async (event) => {
-      setIsLoading(true);
-      await handleGoogleCognitoCallback(event).then(async () => {
-        const { accessToken } = await getTokens();
-        const { email, picture } = await getUserAttributes(accessToken);
-        const userExists = await APIUserExists(email as string);
-        if (!userExists) {
-          navigation.navigate("RegisterInfo");
-        } else {
-          const APIUser = await getAPIUser(email as string, accessToken);
-          dispatch(
-            login({
-              name: APIUser.name,
-              email: email,
-              department: APIUser.department,
-              profileURL: picture,
-            })
-          );
-          navigation.navigate("Root");
-        }
-      });
-      setIsLoading(false);
-    });
-
-    return () => {
-      subscription.remove();
-    };
-  });
-
   return (
     <View style={{ ...styles.container, marginTop: 10 }}>
       <TouchableOpacity
         style={styles.container}
-        onPress={() => Linking.openURL(URLConfiguration.googleURL)}
+        onPress={async () => {
+          const result = await WebBrowser.openAuthSessionAsync(
+            encodeURI(URLConfiguration.googleURL),
+            "bcis:///login"
+          );
+          if (result.type == "success" && result.url != undefined) {
+            setIsLoading(true);
+            await handleGoogleCognitoCallback(result).then(async () => {
+              const { accessToken } = await getTokens();
+              const { email, picture } = await getUserAttributes(accessToken);
+              const userExists = await APIUserExists(email as string);
+              if (!userExists) {
+                navigation.navigate("RegisterInfo");
+              } else {
+                const APIUser = await getAPIUser(email as string, accessToken);
+                dispatch(
+                  login({
+                    name: APIUser.name,
+                    email: email,
+                    department: APIUser.department,
+                    profileURL: picture,
+                  })
+                );
+                setIsLoading(false);
+                navigation.navigate("Root");
+              }
+            });
+          } else {
+            setIsLoading(false);
+            Alert.alert(
+              "Login Failed",
+              "Please check your internet and/or credentials."
+            );
+          }
+        }}
         disabled={isLoading}
       >
         <FastImage

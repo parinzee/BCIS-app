@@ -27,7 +27,16 @@
     "android": {
       "package": "com.parinzee.bcis_sc_app",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 2
+      "versionCode": 2,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "category": ["BROWSABLE", "DEFAULT"],
+          "data": {
+            "scheme": "com.parinzee.bcis_sc_app"
+          }
+        }
+      ]
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
