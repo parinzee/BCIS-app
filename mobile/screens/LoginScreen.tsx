@@ -5,6 +5,7 @@ import {
   StatusBar,
   Pressable,
   Keyboard,
+  Alert,
 } from "react-native";
 import * as React from "react";
 import SignInWithGoogle from "../components/SignInWithGoogle";
@@ -150,10 +151,18 @@ export default function LoginScreen({
           </Button>
           <Button
             mode="contained"
-            onPress={handleSubmit((data) => {
-              handleCogntioRegister(data.email, data.password).then(() => {
-                navigation.navigate("RegisterInfo");
-              });
+            onPress={handleSubmit(async (data) => {
+              const userExists = await APIUserExists(data.email);
+              if (!userExists) {
+                handleCogntioRegister(data.email, data.password, () => {
+                  navigation.navigate("RegisterInfo");
+                });
+              } else {
+                Alert.alert(
+                  "Email Taken",
+                  "A user with this email already exists, please try again."
+                );
+              }
             })}
           >
             Sign Up

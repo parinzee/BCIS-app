@@ -105,12 +105,16 @@ const handleGoogleCognitoCallback = async (event: Linking.EventType) => {
   await downloadTokens(code);
 };
 
-const handleCogntioRegister = async (email: string, password: string) => {
+const handleCogntioRegister = async (
+  email: string,
+  password: string,
+  onSuccess: () => void
+) => {
   await userPool.signUp(email, password, [], [], (err, result) => {});
 
   // Artificial delay for Cogntio to process user
   setTimeout(() => {
-    handleCogntioLogin(email, password);
+    handleCogntioLogin(email, password, onSuccess);
   }, 1500);
 };
 
