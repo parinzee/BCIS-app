@@ -4,7 +4,7 @@
     "description": "The application for BCIS school, developed by Parin from LINK Student Council.",
     "slug": "bcis-sc-app",
     "owner": "parinzee",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon.png",
     "scheme": "bcis",
