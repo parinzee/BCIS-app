@@ -31,6 +31,7 @@ import { APIUserExists, getAPIUser } from "../utils/API";
 import { useDispatch } from "react-redux";
 import { login } from "../slices/userSlice";
 import { RootStackScreenProps } from "../types";
+import SignInWithApple from "../components/SignInWithApple";
 
 export default function LoginScreen({
   navigation,
@@ -171,6 +172,7 @@ export default function LoginScreen({
         <View>
           <Caption style={styles.caption}>Or</Caption>
         </View>
+        <SignInWithApple />
         <SignInWithGoogle />
       </KeyboardAvoidingView>
     </Pressable>

@@ -24,8 +24,10 @@ const URLConfiguration = {
   baseURL: `https://bcis-app.auth.${region}.amazoncognito.com/`,
   hostedUiURL: `https://bcis-app.auth.${region}.amazoncognito.com/login?client_id=${clientId}&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+profile&redirect_uri=${redirectURI}`,
   googleURL: `https://bcis-app.auth.${region}.amazoncognito.com/oauth2/authorize?identity_provider=Google&redirect_uri=${redirectURI}&response_type=CODE&client_id=${clientId}&scope=aws.cognito.signin.user.admin email openid profile`,
+  appleURL: `https://bcis-app.auth.${region}.amazoncognito.com/oauth2/authorize?identity_provider=SignInWithApple&redirect_uri=${redirectURI}&response_type=CODE&client_id=${clientId}&scope=aws.cognito.signin.user.admin email openid profile`,
   tokenURL: `https://bcis-app.auth.${region}.amazoncognito.com/oauth2/token`,
   cognitoAPIURL: `https://cognito-idp.${region}.amazonaws.com/`,
+  idpResponse: `https://bcis-app.auth.${region}.amazoncognito.com/oauth2/idpresponse`,
 };
 
 const downloadTokens = async (code: string) => {
