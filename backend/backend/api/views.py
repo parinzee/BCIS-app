@@ -59,9 +59,13 @@ class AppUserViewSet(viewsets.ModelViewSet):
     def deleteByEmail(self, request):
         user = get_object_or_404(AppUser, email=request.query_params["email"])
         data = AppUserSerializer(user, context={"request": request}).data
+        user_with_email = client.list_users(
+            UserPoolId="ap-southeast-1_bzlNrqEFt",
+            Filter=f"email = \"{request.query_params['email'].strip()}\"",
+        )
         client.admin_delete_user(
             UserPoolId="ap-southeast-1_bzlNrqEFt",
-            Username=request.query_params["email"],
+            Username=user_with_email["Users"][0]["Username"],
         )
         self.perform_destroy(user)
         return Response(data, status=200)
