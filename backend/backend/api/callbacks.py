@@ -7,6 +7,21 @@ from .models import News, Activity, Portfolio, PushID
 import json
 import requests
 
+from markdown import markdown
+from bs4 import BeautifulSoup
+
+
+def strip_markdown(text: str) -> str:
+
+    # md -> html -> text since BeautifulSoup can extract text cleanly
+    html = markdown(text)
+
+    # extract text
+    soup = BeautifulSoup(html, "html.parser")
+    cleaned_text = "".join(soup.findAll(text=True))
+
+    return cleaned_text
+
 
 class PushAPIException(Exception):
     def __init__(self, pushapi_resp, *args) -> None:
@@ -38,7 +53,7 @@ def notify_users(sender, instance, **kwargs):
             "to": push_ids,
             "title": title,
             "subtitle": f"New {sender.__name__}!",
-            "body": instance.content,
+            "body": strip_markdown(instance.content),
             # Deep link to a specific screen
             "data": json.dumps({"url": f"bcis://{sender.__name__.lower()}"}),
             "ttl": "2419200",
