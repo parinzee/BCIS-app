@@ -9,6 +9,7 @@ import requests
 
 from markdown import markdown
 from bs4 import BeautifulSoup
+from time import sleep
 
 
 def strip_markdown(text: str) -> str:
@@ -49,22 +50,29 @@ def notify_users(sender, instance, **kwargs):
         # One liner to get all push_ids
         push_ids = list(map(lambda x: x.push_id, list(PushID.objects.all())))
 
-        payload = {
-            "to": push_ids,
-            "title": title,
-            "subtitle": f"New {sender.__name__}!",
-            "body": strip_markdown(instance.content),
-            # Deep link to a specific screen
-            "data": json.dumps({"url": f"bcis://{sender.__name__.lower()}"}),
-            "ttl": "2419200",
-        }
+        curr_push_ids = []
+        for index, push_id in enumerate(push_ids):
+            curr_push_ids.append(push_id)
 
-        resp = requests.request(
-            "POST",
-            "https://exp.host/--/api/v2/push/send",
-            headers=headers,
-            json=payload,
-        )
+            if index == len(push_ids) - 1 or (index + 1) % 50 == 0:
+                payload = {
+                    "to": curr_push_ids,
+                    "title": title,
+                    "body": strip_markdown(instance.content),
+                    # Deep link to a specific screen
+                    "data": json.dumps({"url": f"bcis://{sender.__name__.lower()}"}),
+                    "ttl": "2419200",
+                }
 
-        if resp.status_code != 200:
-            capture_exception(PushAPIException(resp.text))
+                resp = requests.request(
+                    "POST",
+                    "https://exp.host/--/api/v2/push/send",
+                    headers=headers,
+                    json=payload,
+                )
+
+                if resp.status_code != 200:
+                    capture_exception(PushAPIException(resp.text))
+
+                curr_push_ids = []
+                sleep(0.1)
