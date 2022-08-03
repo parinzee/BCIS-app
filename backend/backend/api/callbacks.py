@@ -48,7 +48,7 @@ def notify_users(sender, instance, **kwargs):
             title = instance.title
 
         # One liner to get all push_ids
-        push_ids = list(map(lambda x: x.push_id, list(PushID.objects.all())))
+        push_ids = list(set(map(lambda x: x.push_id, list(PushID.objects.all()))))
 
         curr_push_ids = []
         for index, push_id in enumerate(push_ids):
