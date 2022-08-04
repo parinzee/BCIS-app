@@ -30,7 +30,8 @@ export default function SignInWithApple() {
         onPress={async () => {
           const result = await WebBrowser.openAuthSessionAsync(
             encodeURI(URLConfiguration.appleURL),
-            "bcis:///login"
+            "bcis:///login",
+            { preferEphemeralSession: true }
           );
           if (result.type == "success" && result.url != undefined) {
             await handleGoogleCognitoCallback(result).then(async () => {

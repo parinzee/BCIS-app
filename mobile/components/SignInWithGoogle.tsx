@@ -27,7 +27,8 @@ export default function SignInWithGoogle() {
         onPress={async () => {
           const result = await WebBrowser.openAuthSessionAsync(
             encodeURI(URLConfiguration.googleURL),
-            "bcis:///login"
+            "bcis:///login",
+            { preferEphemeralSession: true }
           );
           if (result.type == "success" && result.url != undefined) {
             setIsLoading(true);
