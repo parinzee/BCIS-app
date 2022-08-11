@@ -48,6 +48,7 @@ export default function NewsItem({
           rules={MarkdownRenderRules}
           style={{
             paragraph: { marginTop: 0, marginBottom: 0 },
+            link: { color: "#5092F8" },
           }}
         >
           {content}

@@ -121,7 +121,7 @@ export default function ActivityItem({
             <Title style={styles.dateText}>
               {monthNames[activityDate.getMonth()]}
             </Title>
-            <Title style={styles.dateText}>{activityDate.getDay()}</Title>
+            <Title style={styles.dateText}>{activityDate.getDate()}</Title>
           </View>
         </View>
       </Surface>

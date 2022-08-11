@@ -4,7 +4,7 @@
     "description": "The application for BCIS school, developed by Parin from LINK Student Council.",
     "slug": "bcis-sc-app",
     "owner": "parinzee",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon.png",
     "scheme": "bcis",
@@ -22,12 +22,12 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.parinzee.bcis-sc-app",
-      "buildNumber": "1.0.3"
+      "buildNumber": "1.0.4"
     },
     "android": {
       "package": "com.parinzee.bcis_sc_app",
       "googleServicesFile": "./google-services.json",
-      "versionCode": 3,
+      "versionCode": 4,
       "intentFilters": [
         {
           "action": "VIEW",
