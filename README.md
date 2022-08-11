@@ -1,4 +1,7 @@
 # BCIS Application
+![250 Active Devices](https://img.shields.io/badge/Active%20Devices-250-green)
+![134 User Accounts](https://img.shields.io/badge/User%20Accounts-134-blue)
+
 This repo holds the code for the **application I created for my school: BCIS.**
 
 [![Demo Video](https://i.imgur.com/W6HIG3B.png)](https://www.youtube.com/watch?v=pLdjQfUeFTU)
