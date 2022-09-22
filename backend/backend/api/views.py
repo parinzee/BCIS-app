@@ -103,7 +103,7 @@ class FeaturedViewSet(viewsets.ReadOnlyModelViewSet):
     API endpoint that allows the featured news to be viewed
     """
 
-    queryset = Featured.objects.all().reverse()
+    queryset = Featured.objects.all()
     serializer_class = FeaturedSerializer
     permission_classes = [permissions.AllowAny]
 
