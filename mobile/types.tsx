@@ -24,7 +24,7 @@ export type RootStackParamList = {
   Modal: undefined;
   Login: undefined;
   RegisterInfo: undefined;
-  Webview: { url: string; title: string };
+  Webview: { url: string; fallbackURL?: string; title: string };
   GradeCalculator: undefined;
 };
 

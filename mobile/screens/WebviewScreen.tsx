@@ -16,7 +16,9 @@ export default function WebviewScreen({
   React.useEffect(() => {
     if (Platform.OS == "android") {
       navigation.navigate("Root");
-      Linking.openURL(route.params.url);
+      Linking.openURL(
+        route.params.fallbackURL ? route.params.fallbackURL : route.params.url
+      );
     } else {
       navigation.setOptions({ title: route.params.title });
     }

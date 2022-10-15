@@ -68,7 +68,12 @@ export default function ActivityScreen() {
     content = <Title>Unable to get News</Title>;
   }
 
-  return <View style={styles.container}>{content}</View>;
+  return (
+    <View style={styles.container}>
+      <Title>Hey</Title>
+      {content}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

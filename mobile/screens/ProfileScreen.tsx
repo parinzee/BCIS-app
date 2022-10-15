@@ -56,15 +56,22 @@ function AuthenticatedView({ user }: { user: RootState["user"] }) {
   const dispatch = useDispatch();
 
   let handbookURL = "https://www.bcis.ac.th/academic/download/";
+  let handbookFallbackURL = "https://www.bcis.ac.th/academic/download/";
   if (user.department == "K") {
     handbookURL =
-      "https://www.bcis.ac.th/wp-content/uploads/2021/08/BICN-Parents-Handbook-SY2021-2022.pdf";
+      "https://www.bcis.ac.th/wp-content/uploads/2022/08/KG-Handbook2022-2023-1-1.pdf";
+    handbookFallbackURL =
+      "https://drive.google.com/file/d/1fPUY58_32AqzyO6EG9cj1c3-MdQNtXkf/view?usp=sharing";
   } else if (user.department == "E") {
     handbookURL =
-      "https://www.bcis.ac.th/wp-content/uploads/2021/08/Copy-of-Elementary-Handbook-2021-2022.pdf";
+      "https://www.bcis.ac.th/wp-content/uploads/2022/08/Elementary-Handbook-2022-2023.pdf";
+    handbookFallbackURL =
+      "https://drive.google.com/file/d/1WOzfUbZiYuysRWxtyd88cjYG3DJb0RLL/view?usp=sharing";
   } else if (user.department == "H") {
     handbookURL =
-      "https://www.bcis.ac.th/wp-content/uploads/2021/08/HS-Parent-Student-Handbook-2021-2022.pdf";
+      "https://www.bcis.ac.th/wp-content/uploads/2022/08/HS-Parent-Student-Handbook-2022-2023.pdf";
+    handbookFallbackURL =
+      "https://drive.google.com/file/d/1iwD9GnYNmLh1Qx-7orV-GFtKmnyQhJ1x/view?usp=sharing";
   }
 
   const NavigationItems: NavigationItemProps[] = [
@@ -82,6 +89,8 @@ function AuthenticatedView({ user }: { user: RootState["user"] }) {
         navigation.navigate("Webview", {
           title: "School Calendar",
           url: "https://bcis-app.s3.ap-southeast-1.amazonaws.com/2022-2023+Tentative+BCIS+Calendar.pdf",
+          fallbackURL:
+            "https://drive.google.com/file/d/1aT2L9wP43zSFvzDkQBFBtPz3Ujvb7mRH/view?usp=sharing",
         });
       },
     },
@@ -92,6 +101,7 @@ function AuthenticatedView({ user }: { user: RootState["user"] }) {
         navigation.navigate("Webview", {
           title: "Student Handbook",
           url: handbookURL,
+          fallbackURL: handbookFallbackURL,
         });
       },
     },
