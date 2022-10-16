@@ -61,6 +61,7 @@ export interface News {
 // Read models.py in backend for more info
 export type Activity =
   | {
+      type: "Activity";
       url: string;
       title: string;
       emoji: string;
@@ -72,6 +73,7 @@ export type Activity =
       video_URL: string | null;
     }
   | {
+      type: "Activity";
       url: string;
       title: string;
       emoji: string;
@@ -82,6 +84,22 @@ export type Activity =
       thumbnail_File: string;
       video_URL: string | null;
     };
+
+export interface TeamScores {
+  type: "TeamScores";
+  hs_scores: {
+    red: number;
+    blue: number;
+    green: number;
+    yellow: number;
+  };
+  elem_scores: {
+    red: number;
+    blue: number;
+    green: number;
+    yellow: number;
+  };
+}
 
 export interface Portfolio {
   url: string;

@@ -177,3 +177,5 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
 });
+
+export { styles };

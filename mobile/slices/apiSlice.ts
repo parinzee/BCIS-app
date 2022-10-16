@@ -1,5 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { News, Activity, Featured, Votd, Portfolio, GPAScore } from "../types";
+import {
+  News,
+  Activity,
+  Featured,
+  Votd,
+  Portfolio,
+  GPAScore,
+  TeamScores,
+} from "../types";
 import { serverURL } from "../utils/API";
 
 export const apiSlice = createApi({
@@ -13,6 +21,9 @@ export const apiSlice = createApi({
     }),
     getActivities: builder.query<Activity[], void>({
       query: () => "/activities",
+    }),
+    getTeamScores: builder.query<TeamScores, void>({
+      query: () => "/team-scores",
     }),
     getPortfolios: builder.query<Portfolio[], void>({
       query: () => "/portfolio",
@@ -62,6 +73,7 @@ export const apiSlice = createApi({
 export const {
   useGetNewsQuery,
   useGetActivitiesQuery,
+  useGetTeamScoresQuery,
   useGetFeaturedQuery,
   useGetVerseOfDayQuery,
   useGetPortfoliosQuery,
